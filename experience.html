@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nitin Kumar | Experience</title>
+  <meta
+    name="description"
+    content="Professional experience of Nitin Kumar, an engineer focused on industrial automation, software controls, PLC/SCADA-adjacent systems, OPC UA integration, and technical software development in the UK."
+  />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --bg-soft: #111823;
+      --panel: rgba(17, 24, 35, 0.78);
+      --panel-border: rgba(255, 255, 255, 0.08);
+      --text: #e8eef7;
+      --muted: #9fb0c3;
+      --accent: #4db5ff;
+      --accent-soft: rgba(77, 181, 255, 0.14);
+      --success: #73e2a7;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(77, 181, 255, 0.12), transparent 28%),
+        radial-gradient(circle at top right, rgba(115, 226, 167, 0.08), transparent 22%),
+        linear-gradient(180deg, #081018 0%, #0b0f14 35%, #0e141d 100%);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .navbar {
+      background: rgba(8, 16, 24, 0.76);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 0.9rem 0;
+    }
+
+    .navbar-brand {
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.95rem;
+    }
+
+    .nav-link {
+      color: var(--muted) !important;
+      font-weight: 500;
+      transition: 0.2s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus {
+      color: var(--text) !important;
+    }
+
+    section {
+      padding: 5rem 0;
+    }
+
+    .section-heading {
+      margin-bottom: 2rem;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      max-width: 760px;
+      line-height: 1.8;
+      margin-top: 0.85rem;
+    }
+
+    .section-kicker {
+      color: var(--accent);
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      margin-bottom: 0.85rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .panel-card {
+      height: 100%;
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    .panel-card h3,
+    .panel-card h4 {
+      font-weight: 700;
+      margin-bottom: 0.85rem;
+    }
+
+    .panel-card p,
+    .panel-card li {
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 1rem;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--accent);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 3rem;
+      padding-left: 3rem;
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      transition: 0.3s ease;
+    }
+
+    .timeline-item:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-soft);
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -1.5rem;
+      top: 2rem;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 3px solid var(--bg);
+      box-shadow: 0 0 10px rgba(77, 181, 255, 0.5);
+    }
+
+    .timeline-icon {
+      position: absolute;
+      left: -2rem;
+      top: 1.5rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 1.2rem;
+      border: 2px solid var(--bg);
+    }
+
+    .timeline-date {
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .timeline-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .timeline-company {
+      color: var(--muted);
+      font-weight: 500;
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+
+    .timeline-description {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .timeline-description ul {
+      margin-top: 1rem;
+      padding-left: 1.5rem;
+    }
+
+    .timeline-description li {
+      margin-bottom: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .timeline::before {
+        left: 2rem;
+      }
+
+      .timeline-item {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        text-align: left;
+        padding-left: 3rem;
+      }
+
+      .timeline-item::before {
+        left: -8px;
+      }
+
+      .timeline-item .timeline-icon {
+        left: 1rem;
+      }
+
+      .timeline-item-left .timeline-icon,
+      .timeline-item-right .timeline-icon {
+        left: 1rem;
+      }
+
+      .timeline-description ul {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Nitin Kumar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="experience.html">Experience</a></li>
+          <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://www.linkedin.com/in/r-nitin-kumar/" target="_blank">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section id="experience-hero" style="padding: 10rem 0 0;">
+    <div class="container">
+      <div class="section-heading text-center">
+        <div class="section-kicker">Professional Journey</div>
+        <h2 class="section-title">My Experience</h2>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience-timeline">
+    <div class="container">
+      <div class="timeline">
+        <div class="timeline-item timeline-item-left">
+          <div class="timeline-date">Mar 2025 – Nov 2025</div>
+          <div class="timeline-title">Software Automation Engineer</div>
+          <div class="timeline-company">Samurai Machine Tools, Leamington Spa, United Kingdom</div>
+          <div class="timeline-description">
+            <p>Worked in an industrial systems environment developing software for PLC-controlled CNC machinery, HMI/SCADA-style interfaces, and real-time machine communication. The role focused on control-system integration, machine visualisation, diagnostics, fault monitoring, and operator-facing applications that supported reliable machine operation. Technologies included C#, ASP.NET Core, OPC UA, CODESYS, WebSockets, Azure, and industrial automation systems.</p>
+            <ul>
+              <li>Developed HMI/SCADA interfaces using Unity for real-time visualisation of machine states, alarms, and process variables from PLC-controlled systems.</li>
+              <li>Optimised OPC UA communication for large industrial data transfers, reducing 100MB transfer time from around 2 minutes to about 35 seconds and improving real-time responsiveness.</li>
+              <li>Integrated PLC-controlled workflows with EtherCAT drives, industrial I/O systems, and fieldbus-connected machinery including Profinet and Ethernet/IP.</li>
+              <li>Implemented fault monitoring and alarm handling to improve machine diagnostics and reduce downtime during operations.</li>
+              <li>Produced technical documentation for communication flows, telemetry handling, and control-system integration, while supporting servo motor control, homing, jogging, and motion sequencing through operator-facing interfaces.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item timeline-item-right">
+          <div class="timeline-date">Feb 2021 – Apr 2023</div>
+          <div class="timeline-title">Software Engineer</div>
+          <div class="timeline-company">Cognizant Technology Solutions, Bangalore, India</div>
+          <div class="timeline-description">
+            <p>Worked on backend services within distributed systems handling large-scale, real-time data processing with a strong focus on reliability, monitoring, and system performance. The role involved building and maintaining high-availability services, improving observability, and supporting transactional workflows in enterprise software environments. Technologies included C#, ASP.NET Core, SQL Server, Azure Service Bus, and ELK Stack.</p>
+            <ul>
+              <li>Developed backend services within distributed systems for large-scale, real-time data processing.</li>
+              <li>Engineered high-availability services supporting real-time transactional workflows with a focus on reliability and system performance.</li>
+              <li>Worked within Agile development practices and SDLC processes to deliver and maintain distributed backend services.</li>
+              <li>Improved observability and debugging workflows using the ELK stack, enabling faster performance analysis and issue resolution.</li>
+            
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills-summary" style="padding: 2rem 0;">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <div class="panel-card h-100">
+          <h3>Technical Skills</h3>
+          <ul class="muted-list">
+            <li>Industrial Automation &amp; Controls: PLC Programming &amp; Integration (Siemens, CODESYS), SCADA Systems, HMI Development, Industrial Automation Systems, Control Systems Engineering, Fault Monitoring &amp; Alarm Handling, IEC 61131-3.</li>
+            <li>Industrial Communication: OPC UA, Profinet, Ethernet/IP, EtherCAT, Industrial I/O Systems.</li>
+            <li>Real-Time Systems: Real-Time Data Systems, Machine Communication, Telemetry Pipelines.</li>
+            <li>Software &amp; Development: C#, .NET Core, REST APIs, Microservices, WebSockets, SQL Server, MongoDB, Azure, Unity.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="panel-card h-100">
+          <h3>Education &amp; Achievements</h3>
+          <ul class="muted-list">
+            <li>M.Sc. Computer Games Technology, City, University of London — Graduated January 2025.</li>
+            <li>B.Tech. Mechanical Engineering, Amrita School of Engineering — Graduated July 2021.</li>
+            <li>Designed and built go-karts from scratch and took part in engineering competitions, developing hands-on experience in mechanical systems, assembly, and practical troubleshooting.</li>
+            <li>TIGA UK Best Student Game Award Finalist.</li>
+            <li>Creator of <em>Inside ADHD</em>, showcased at Immersive Rally London.</li>
+            <li>Additional Academic Background: 3D Modelling (SolidWorks, Blender), C++ (Arduino), Embedded Systems (basic), Computer Vision.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <footer style="padding: 1.5rem 0 2.5rem; color: var(--muted); border-top: 1px solid rgba(255, 255, 255, 0.05); text-align: center;">
+    <div class="container">
+      <p>&copy; 2026 Nitin Kumar. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>

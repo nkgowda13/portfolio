@@ -1,201 +1,834 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/style.css">
-    <title>Nitin Kumar</title>
-</head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nitin Kumar | Industrial Automation & Software Engineer</title>
+  <meta
+    name="description"
+    content="Portfolio of Nitin Kumar, an engineer focused on industrial automation, software controls, PLC/SCADA-adjacent systems, OPC UA integration, and technical software development in the UK."
+  />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
-<body>
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --bg-soft: #111823;
+      --panel: rgba(17, 24, 35, 0.78);
+      --panel-border: rgba(255, 255, 255, 0.08);
+      --text: #e8eef7;
+      --muted: #9fb0c3;
+      --accent: #4db5ff;
+      --accent-soft: rgba(77, 181, 255, 0.14);
+      --success: #73e2a7;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      --radius: 22px;
+    }
 
-    <header>
-        <div id="particles"></div>
-        
-        <nav class="navbar navbar-expand-lg navbar-dark">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="index.html" style="color: white;">Nitin Kumar</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav">
-                <li class="nav-item">
-                  <a class="nav-link" href="index.html" style="color: white;">Home</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="projects.html" style="color: white;">Projects</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="gallery.html" style="color: white;">Gallery</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="https://www.linkedin.com/in/r-nitin-kumar/" target="_blank" style="color: white;">LinkedIn</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="https://github.com/nkgowda13" target="_blank" style="color: white;">GitHub</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="Resume.pdf" target="_blank" style="color: white;">Resume</a>
-                </li>
-              </ul>
-            </div>
-            
-          <div class=" pacman"></div>
-          </div>
-        </nav>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        <div class="info-text">
-            <h1>Nitin Kumar</h1>
-            <h3>Unity Programmer | VR Developer | .NET Developer</h3>
-            <h5>Crafting immersive worlds through code and design</h5>
-        </div>
-    </header>
+    html {
+      scroll-behavior: smooth;
+    }
 
+    body {
+      font-family: 'Inter', sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(77, 181, 255, 0.12), transparent 28%),
+        radial-gradient(circle at top right, rgba(115, 226, 167, 0.08), transparent 22%),
+        linear-gradient(180deg, #081018 0%, #0b0f14 35%, #0e141d 100%);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .navbar {
+      background: rgba(8, 16, 24, 0.76);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 0.9rem 0;
+    }
+
+    .navbar-brand {
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.95rem;
+    }
+
+    .nav-link {
+      color: var(--muted) !important;
+      font-weight: 500;
+      transition: 0.2s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus {
+      color: var(--text) !important;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding: 7rem 0 4rem;
+      overflow: hidden;
+    }
     
+    .hero-visual-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+}
 
-    <section id="features" >
-        <div class="header">
-            <h1>My Projects</h1>
-        </div>
-        
-        <div class="feature-cards row row-cols-1 row-cols-md-2 row-cols-lg-3">
+.hero-image-card {
+  width: 100%;
+  max-width: 360px;
+  background: linear-gradient(180deg, rgba(17, 24, 35, 0.88), rgba(11, 15, 20, 0.92));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 26px;
+  padding: 1rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+}
 
-          <div class="col">
-            <div class="card">
-              <iframe width="100%" height="200" src="https://www.youtube.com/embed/e1ZE2OY_I8Q?si=-D3kOfPYIr6Vv3Dl" 
-              title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
-              gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-              <div class="card-body">
-                <h5 class="card-title">The Hero's Guild</h5>
-      <span class="badge rounded-pill text-bg-light">Unity VR</span>
-      <span class="badge rounded-pill text-bg-light">.NET API Development</span>
-      <span class="badge rounded-pill text-bg-light">Cloud Storage</span>
-      <span class="badge rounded-pill text-bg-light">Dynamic Asset Loading</span>
-      <span class="badge rounded-pill text-bg-light">Narrative Design</span>
-      <span class="badge rounded-pill text-bg-light">Environmental Storytelling</span>
-      <p class="card-text">The Hero's Guild is a VR game focused on dynamic asset loading and narrative-driven 
-        design, overcoming the hardware limitations of VR headsets by using cloud-based asset storage and API 
-        integration. The game adapts its world and quests based on player decisions, creating a personalized 
-        and evolving experience. This was my dissertation project that included the development of the game, the API, 
-        and integration of Dropbox with API for storing and loading high-quality assets, ensuring seamless gameplay 
-        in expansive VR environments.</p>
-              </div>
-            </div>
-          </div>
-      
-          <div class="col">
-            <div class="card">
-              <iframe width="100%" height="200" src="https://www.youtube.com/embed/a54Q6WQo9wQ?si=dfeSZQO4HwMlvEbb" 
-              title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
-              gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-              <div class="card-body">
-                <h5 class="card-title">Bowled.io</h5>
-                <span class="badge rounded-pill text-bg-light">Unity</span>
-                <span class="badge rounded-pill text-bg-light">Figma</span>
-                    <span class="badge rounded-pill text-bg-light">Managing Database</span>
-                    <span class="badge rounded-pill text-bg-light">Facebook SDK</span>
-                    <span class="badge rounded-pill text-bg-light">Firebase SDK</span>
-                    <span class="badge rounded-pill text-bg-light">API Integration</span>
-                <p class="card-text">Bowled.io is the world’s first Cricket based Play 2 Earn game: 
-                  an ecosystem of assets where players can compete against each other on user-owned teams. 
-                  As part of my freelance work, I took on the challenge of conceptualizing, designing, and 
-                  developing Bowled.io. I was also given the lead to develop and integrate APIs with the 
-                  game along with the integration of firebase and facebook SDKs. The project showcases my 
-                  passion for game development and the ability to deliver unique gaming experiences tailored
-                   to specific interests and communities.</p>
-                <a href="https://bowled.io/" target="_blank" style="color: rgb(131, 131, 131);">View website</a>
-              </div>
-            </div>
-          </div>
-      
-          <div class="col">
-            <div class="card">
-              <iframe width="100%" height="200" src="https://www.youtube.com/embed/siqa0jKtts0?si=qSfDwDx5mdP2tVIN" 
-              title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
-              gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                <div class="card-body">
-                  <h5 class="card-title">Emotion Escapade</h5>
-                  <span class="badge rounded-pill text-bg-light">Unity</span>
-                  <span class="badge rounded-pill text-bg-light">Photoshop</span>
-                  <span class="badge rounded-pill text-bg-light">Loosely Coupled Code</span>
-                  <span class="badge rounded-pill text-bg-light">Customizable Levels</span>
-                  <span class="badge rounded-pill text-bg-light">Event Driven Architecture</span>
-                  <p class="card-text">Emotion Escapade is a narrative journey through the landscape of
-                    emotions in a side-scrolling platformer. Players become the
-                    character narrating his way through life representing a wide range
-                    of emotions like happiness, sadness and anger, and when the
-                    player equips these emotions, he gets a unique ability. The levels
-                    also are a symbolic representation of emotional challenges,
-                    offering the experience mirroring the ups and downs of real life
-                    emotions. The code follows an event driven architecture making it 
-                    loosely coupled while the levels are completely customizable, making 
-                    it easy to create and build new levels, enhancing the game’s flexibility.</p>
-                  <!--<a href="#" class="btn btn-primary">Go somewhere</a>-->
-                </div>
-              </div>
-            </div>
-      
+.hero-image {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 18px;
+  display: block;
+}
 
-        </div>
-        
-        <div class="text-center">
-          <a href="projects.html" class="btn btn-secondary" style="margin-top: 15px;">More Projects</a>
-        </div>
-    </section>
+.hero-panel {
+  width: 100%;
+  max-width: 520px;
+}
 
-    <div class="lines">
-      <hr style="border-width: 2px !important;">
+@media (max-width: 991px) {
+  .hero-visual-wrap {
+    align-items: center;
+  }
+
+  .hero-image-card {
+    display: none;
+  }
+
+  .hero-panel {
+    max-width: 100%;
+  }
+
+  .hero-image {
+    height: 340px;
+  }
+}
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 54px 54px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.9), transparent 92%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      right: -140px;
+      top: 80px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(77, 181, 255, 0.16), transparent 65%);
+      filter: blur(10px);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.55rem 0.9rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      font-size: 0.83rem;
+      color: var(--muted);
+      margin-bottom: 1.35rem;
+    }
+
+    .status-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 18px rgba(115, 226, 167, 0.7);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.7rem, 6vw, 5.6rem);
+      line-height: 0.96;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      max-width: 820px;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero h1 span {
+      color: var(--accent);
+    }
+
+    .hero-lead {
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.85;
+      margin-bottom: 1.8rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-bottom: 1.7rem;
+    }
+
+    .btn-main,
+    .btn-ghost {
+      padding: 0.95rem 1.25rem;
+      border-radius: 14px;
+      font-weight: 600;
+      border: 1px solid transparent;
+      transition: 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+
+    .btn-main {
+      background: linear-gradient(135deg, #4db5ff, #3598e0);
+      color: #081018;
+      box-shadow: 0 12px 35px rgba(77, 181, 255, 0.24);
+    }
+
+    .btn-main:hover {
+      transform: translateY(-2px);
+      color: #081018;
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      border-color: rgba(255, 255, 255, 0.09);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text);
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+    }
+
+    .hero-tags span,
+    .chip {
+      background: var(--accent-soft);
+      color: #cbe7ff;
+      border: 1px solid rgba(77, 181, 255, 0.2);
+      padding: 0.55rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .hero-panel {
+      position: relative;
+      background: linear-gradient(180deg, rgba(17, 24, 35, 0.88), rgba(11, 15, 20, 0.92));
+      border: 1px solid var(--panel-border);
+      border-radius: 26px;
+      padding: 1.2rem;
+      box-shadow: var(--shadow);
+      margin-top: 2.2rem;
+    }
+
+    .terminal-top {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .terminal-top span {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.22);
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.9rem;
+    }
+
+    .metric-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 18px;
+      padding: 1rem;
+      min-height: 120px;
+    }
+
+    .metric-label {
+      color: var(--muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.65rem;
+    }
+
+    .metric-value {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.45rem;
+    }
+
+    .metric-copy {
+      color: var(--muted);
+      font-size: 0.93rem;
+      line-height: 1.6;
+    }
+
+    section {
+      padding: 5rem 0;
+    }
+
+    .section-heading {
+      margin-bottom: 2rem;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      max-width: 760px;
+      line-height: 1.8;
+      margin-top: 0.85rem;
+    }
+
+    .section-kicker {
+      color: var(--accent);
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      margin-bottom: 0.85rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .panel-card {
+      height: 100%;
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    .profile-card {
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius);
+      padding: 1.2rem;
+      box-shadow: var(--shadow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .profile-card .hero-image-card {
+      width: 100%;
+      max-width: 100%;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      padding: 0;
+    }
+
+    .profile-card .hero-image {
+      height: auto;
+      max-height: 560px;
+    }
+
+    .panel-card h3,
+    .panel-card h4 {
+      font-weight: 700;
+      margin-bottom: 0.85rem;
+    }
+
+    .panel-card p,
+    .panel-card li {
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .skill-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .skill-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 18px;
+      padding: 1rem;
+    }
+
+    .skill-box h4 {
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-card {
+      height: 100%;
+      background: linear-gradient(180deg, rgba(17, 24, 35, 0.86), rgba(10, 14, 20, 0.96));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 22px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      transition: 0.25s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(77, 181, 255, 0.25);
+    }
+
+    .feature-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--accent);
+      background: rgba(77, 181, 255, 0.12);
+      margin-bottom: 1.1rem;
+    }
+
+    .feature-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.8rem;
+      font-weight: 700;
+    }
+
+    .feature-card p {
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .project-highlight {
+      background: linear-gradient(135deg, rgba(77, 181, 255, 0.08), rgba(255, 255, 255, 0.02));
+      border: 1px solid rgba(77, 181, 255, 0.16);
+      border-radius: 26px;
+      padding: 1.8rem;
+      height: 100%;
+    }
+
+    .project-highlight ul {
+      padding-left: 1.1rem;
+      margin-top: 1rem;
+    }
+
+    .project-highlight li {
+      margin-bottom: 0.65rem;
+    }
+
+    .muted-list {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 1rem;
+    }
+
+    .muted-list li {
+      position: relative;
+      padding-left: 1.2rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .muted-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.72rem;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .image-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .project-image {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--shadow);
+    }
+
+    .image-description {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-top: 0.5rem;
+      text-align: center;
+    }
+
+    .project-mini {
+      height: 100%;
+    }
+
+    .project-mini h4 {
+      font-size: 1.08rem;
+    }
+
+    .creative-note {
+      border-left: 3px solid rgba(77, 181, 255, 0.35);
+      padding-left: 1rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .cta-band {
+      background: linear-gradient(135deg, rgba(77, 181, 255, 0.12), rgba(255, 255, 255, 0.03));
+      border: 1px solid rgba(77, 181, 255, 0.16);
+      border-radius: 28px;
+      padding: 2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .cta-band p {
+      color: var(--muted);
+      margin-top: 0.75rem;
+      line-height: 1.8;
+      max-width: 800px;
+    }
+
+    footer {
+      padding: 1.5rem 0 2.5rem;
+      color: var(--muted);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    @media (max-width: 991px) {
+      .hero {
+        padding-top: 6.3rem;
+      }
+
+      .metric-grid,
+      .skill-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .hero h1 {
+        font-size: 2.9rem;
+      }
+
+      .hero-panel {
+        margin-top: 1.5rem;
+      }
+
+      section {
+        padding: 4rem 0;
+      }
+
+      .panel-card,
+      .feature-card,
+      .project-highlight,
+      .cta-band {
+        padding: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Nitin Kumar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="experience.html">Experience</a></li>
+          <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://www.linkedin.com/in/r-nitin-kumar/" target="_blank">LinkedIn</a></li>
+        </ul>
+      </div>
     </div>
+  </nav>
 
-    <section id="features" >
-      <div class="header">
-          <h1>My Gallery</h1>
-      </div>
-      <div class="info">
-        <p id="me">
-          I enjoy sketching in my free time, finding it a relaxing and creatively fulfilling activity. This passion 
-          for sketching helps me build games by allowing me to visualize and conceptualize my ideas more effectively. 
-          I am still learning and getting better at it, continuously improving my ability to create distinctive characters, 
-          environments, and elements that contribute to the overall aesthetic and immersive experience of my games.<br><br>
+  <header class="hero">
+  <div class="container position-relative" style="z-index: 2;">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-7">
+        <h1>
+          <span>NITIN</span> KUMAR
+        </h1>
+        <p class="hero-lead">
+          Industrial Automation and Controls Engineer with experience in PLC-integrated systems, HMI/SCADA development, OPC UA-based communication, and real-time industrial software. My background includes control-system integration, machine visualisation, fault monitoring, testing, debugging, and technical application development for industrial environments.
         </p>
-      </div>
-      <div class="feature-cards row row-cols-1 row-cols-md-2 row-cols-lg-3">
 
-        <div class="col">
-          <div class="card">
-            <img src="Gallery/Naruto.jpg" class="card-img-top" alt="...">
+        <div class="hero-actions">
+          <a href="experience.html" class="btn-main">
+            <i class='bx bx-grid-alt'></i>
+            View Experience
+          </a>
+        </div>
+
+        <div class="hero-tags">
+          <span>PLC Integration</span>
+          <span>SCADA / HMI</span>
+          <span>OPC UA</span>
+          <span>Fault Monitoring</span>
+          <span>Testing & Debugging</span>
+          <span>Industrial Automation</span>
+        </div>
+      </div>
+
+      <div class="col-lg-5">
+        <div class="hero-visual-wrap">
+          <div class="hero-image-card">
+            <img src="nitin-profile.jpg" alt="Portrait of Nitin Kumar" class="hero-image">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+  <section id="featured-project">
+    <div class="container">
+      <div class="section-heading">
+        <div class="section-kicker">Featured Automation Work</div>
+        <h2 class="section-title">Conveyor Automation Project</h2>
+      </div>
+
+      <div class="row g-4 align-items-stretch">
+        <div class="col-lg-7">
+          <div class="project-highlight">
+            <h3>Conveyor Control System with PLC Logic, OPC UA, and HMI-Style Simulation</h3>
+            <p></p>
+        <p>
+              Developed an end-to-end conveyor control project in which a box is detected by two sensors, starts conveyor movement on first detection, and stops at the second sensor based on defined control logic. The system links a Unity-based simulation with CODESYS through OPC UA, demonstrating real-time communication, control sequencing, and process visualisation across an industrial-style workflow.
+            </p>
+            <ul>
+              <li>Implemented sensor-based control logic for conveyor start/stop sequencing and repeatable system behaviour.</li>
+              <li>Integrated Unity and CODESYS using OPC UA to enable real-time communication between simulation and control logic.</li>
+              <li>Applied industrial automation concepts including PLC-style sequencing, HMI-oriented visualisation, testing, and debugging.</li>
+              <li>Demonstrates practical skills relevant to controls, industrial automation, commissioning support, and system integration roles.</li>
+            </ul>
+            <div class="text-center mt-5">
+              <a href="DetailedProjects/Conveyor/conveyor.html" class="btn-main">View Full Project</a>
+            </div>
           </div>
         </div>
 
-        <div class="col">
-          <div class="card">
-            <img src="Gallery/summit.png" class="card-img-top" alt="...">
+        <div class="col-lg-5">
+          <div class="panel-card h-100">
+            <h3>Project Snapshots</h3>
+            <p></p>
+            <div class="image-grid mt-4">
+              <div class="image-container">
+                <img src="Projects/LadderLogic.png" alt="Ladder Logic Diagram" class="project-image">
+                <p class="image-description">Ladder Logic Diagram: Illustrates the control logic used in the CODESYS environment for sensor and motor sequencing.</p>
+              </div>
+              <div class="image-container">
+                <img src="Projects/conveyor.png" alt="Conveyor System Diagram" class="project-image">
+                <p class="image-description">Conveyor System Diagram: Shows the Unity simulation setup with sensors and conveyor belt integration.</p>
+              </div>
+            </div>
           </div>
         </div>
-
-        <div class="col">
-          <div class="card">
-            <img src="Gallery/hisoka.jpg" class="card-img-top" alt="...">
-          </div>
-        </div>
-
       </div>
-      
-      <div class="text-center">
-        <a href="gallery.html" class="btn btn-secondary" style="margin-top: 15px;">More Sketches</a>
-      </div>
+    </div>
   </section>
 
-    <button class="scroll-top" onclick="scrollToTop()">
-        <i class='bx bxs-up-arrow'></i>
-    </button>
+  <section id="about">
+    <div class="container">
+      <div class="section-heading">
+        <div class="section-kicker">Industrial Experience</div>
+        <h2 class="section-title">Experience in live industrial automation systems</h2>
+        
+      </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="script.js"></script>
+      <div class="row g-4 align-items-start">
+        <div class="col-lg-6">
+          <div class="panel-card h-100">
+            <h3>Software Automation Engineer</h3>
+            <h5>Samurai Machine Tools</h5>
+            <p></p>
+            <p>
+              Worked in an industrial systems environment building software for PLC-controlled CNC machinery, HMI/SCADA-style interfaces, and real-time machine communication. My work focused on control-system integration, machine visualisation, diagnostics, fault monitoring, and operator-facing applications that support reliable machine operation.
+            </p>
+            <ul class="muted-list">
+              <li>Developed HMI/SCADA interfaces for real-time machine monitoring, alarms, and process visualisation.</li>
+              <li>Optimised OPC UA communication for industrial data transfer, improving real-time responsiveness.</li>
+              <li>Worked with PLC-controlled workflows, EtherCAT drives, industrial I/O systems, and fieldbus-connected machinery.</li>
+              <li>Implemented fault monitoring and alarm handling to improve diagnostics and reduce downtime.</li>
+              <li>Produced technical documentation for communication flows, telemetry handling, and control-system integration.</li>
+              <li>Supported servo motor control, homing, jogging, and motion sequencing through operator-facing interfaces.</li>
+            </ul>
+          </div>
+        </div>
 
+        <div class="col-lg-6">
+          <div class="panel-card h-100">
+            <h3>Key Experience Highlights</h3>
+            <div class="metric-grid">
+              <div class="metric-card">
+                <div class="metric-label">Industrial Role</div>
+                <div class="metric-value">Software Automation Engineer</div>
+                <div class="metric-copy">Worked on industrial software for PLC-controlled CNC machinery, monitoring, and operator-facing systems.</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-label">Control Systems</div>
+                <div class="metric-value">PLC + HMI / SCADA</div>
+                <div class="metric-copy">Built HMI/SCADA-style interfaces for machine states, alarms, diagnostics, and process visualisation.</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-label">Industrial Communication</div>
+                <div class="metric-value">OPC UA + Fieldbus</div>
+                <div class="metric-copy">Worked with OPC UA, EtherCAT, Profinet, Ethernet/IP, and industrial I/O-connected workflows.</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-label">Diagnostics</div>
+                <div class="metric-value">Fault Monitoring</div>
+                <div class="metric-copy">Implemented alarm handling and machine diagnostics to support reliability and reduce downtime.</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-label">Motion Control</div>
+                <div class="metric-value">Servo Systems</div>
+                <div class="metric-copy">Worked on servo motor control, homing, jogging, and motion sequencing through operator-facing interfaces.</div>
+              </div>
+              <div class="metric-card">
+                <div class="metric-label">Engineering Support</div>
+                <div class="metric-value">Testing + Documentation</div>
+                <div class="metric-copy">Supported testing, debugging, communication flow documentation, and control-system integration work.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="creative">
+    <div class="container">
+      <div class="section-heading">
+        <div class="section-kicker">Additional Work</div>
+        <h2 class="section-title">Broader technical and creative projects</h2>
+      </div>
+
+      <div class="row g-4 align-items-stretch">
+        <div class="col-lg-8">
+          <div class="panel-card h-100">
+            <h3>Technical Projects</h3>
+            <p>
+              Alongside my industrial automation work, I have also built software, simulation, and interactive development projects that reflect strong problem solving, system design, and end-to-end implementation. These projects show broader technical depth while remaining secondary to my core focus on automation, controls, and industrial systems.
+            </p>
+            <div class="hero-actions mb-0 mt-3">
+              <a href="projects.html" class="btn-ghost">Explore Projects</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="panel-card h-100 d-flex flex-column justify-content-between">
+            <div>
+              <h3>Creative Work</h3>
+              <p>I also maintain a separate gallery of artwork and visual work. This section reflects creativity and design interest, while my professional portfolio is centred on industrial automation, control systems, and technical engineering roles.</p>
+            </div>
+            <div class="hero-actions mb-0 mt-3">
+              <a href="gallery.html" class="btn-ghost">View Gallery</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="cta-band">
+        <div class="section-kicker">Open to Opportunities</div>
+        <h2 class="section-title" style="font-size: clamp(1.8rem, 3vw, 2.6rem);">Looking for opportunities in automation, controls, and technical software</h2>
+        <p>
+          I am interested in roles where I can contribute to industrial automation, controls engineering, software integration,
+          simulation-led engineering workflows, and technical problem solving. I am actively building my portfolio around relevant engineering projects
+          and am open to opportunities across the UK.
+        </p>
+        <div class="hero-actions mt-4 mb-0">
+          <a href="https://www.linkedin.com/in/r-nitin-kumar/" target="_blank" class="btn-main">
+            <i class='bx bxl-linkedin-square'></i>
+            Connect on LinkedIn
+          </a>
+          <a href="mailto:nitinkumargowda99@gmail.com" class="btn-ghost">
+            <i class='bx bx-envelope'></i>
+            Email Me
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container d-flex flex-column flex-md-row justify-content-between gap-2">
+      <span>© 2026 Nitin Kumar</span>
+      <span>Industrial Automation • Controls Software • Technical Engineering</span>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
+</html>
