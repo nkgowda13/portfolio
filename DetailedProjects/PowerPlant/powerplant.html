@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PowerPlant Control System | Detailed Project</title>
+  <meta name="description" content="Detailed breakdown of the PowerPlant automation and control project by Nitin Kumar." />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --bg-soft: #111823;
+      --panel: rgba(17, 24, 35, 0.78);
+      --panel-border: rgba(255, 255, 255, 0.08);
+      --text: #e8eef7;
+      --muted: #9fb0c3;
+      --accent: #4db5ff;
+      --accent-soft: rgba(77, 181, 255, 0.14);
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(77, 181, 255, 0.12), transparent 28%),
+        radial-gradient(circle at top right, rgba(115, 226, 167, 0.08), transparent 22%),
+        linear-gradient(180deg, #081018 0%, #0b0f14 35%, #0e141d 100%);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .navbar {
+      background: rgba(8, 16, 24, 0.76);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 0.9rem 0;
+    }
+
+    .navbar-brand {
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.95rem;
+    }
+
+    .nav-link {
+      color: var(--muted) !important;
+      font-weight: 500;
+      transition: 0.2s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus {
+      color: var(--text) !important;
+    }
+
+    .section-heading {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .section-kicker {
+      color: var(--accent);
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      margin-bottom: 0.85rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .lead {
+      color: var(--muted);
+      max-width: 860px;
+      margin: 0.9rem auto 0;
+      line-height: 1.8;
+    }
+
+    .project-panel {
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 2rem 2.2rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .project-panel h2 {
+      font-size: clamp(1.4rem, 2.3vw, 2rem);
+      font-weight: 700;
+      margin-bottom: 0.85rem;
+    }
+
+    .project-panel p {
+      color: var(--muted);
+      margin-bottom: 1 rem;
+      line-height: 1.75;
+    }
+
+    .overview-panel {
+      padding: 2.4rem 2.4rem;
+    }
+
+    .overview-panel p:last-of-type {
+      margin-bottom: 0.6rem;
+    }
+
+    .overview-points {
+      margin: 1rem 0 1.15rem;
+    }
+
+    .objective-panel p{
+      margin-bottom: 1rem;
+    }
+
+    .toc-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.85rem;
+      align-items: stretch;
+    }
+
+    .toc-list a {
+      display: block;
+      padding: 0.95rem 1rem;
+      min-height: 52px;
+      border-radius: 12px;
+      border: 1px solid rgba(77, 181, 255, 0.22);
+      background: rgba(77, 181, 255, 0.08);
+      color: #cfe9ff;
+      font-weight: 600;
+      transition: 0.2s ease;
+    }
+
+    .toc-list a:hover {
+      background: rgba(77, 181, 255, 0.16);
+      transform: translateX(2px);
+    }
+
+    @media (max-width: 767px) {
+      .project-panel {
+        padding: 1.6rem 1.2rem;
+      }
+
+      .toc-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .bullet-list {
+      margin: 0.5rem 1.5rem 0.85rem;
+      padding-left: 1rem;
+      color: #cfe9ff;
+      line-height: 1.75;
+    }
+
+    footer {
+      margin-top: 2.4rem;
+    }
+
+    .footer-bar {
+      padding: 1.2rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--muted);
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="../../index.html">Nitin Kumar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="../../index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="../../experience.html">Experience</a></li>
+          <li class="nav-item"><a class="nav-link" href="../../projects.html">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://www.linkedin.com/in/r-nitin-kumar/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section style="padding-top: 6.5rem;">
+    <div class="container">
+      <div class="section-heading">
+        <div class="section-kicker">Project Case Study</div>
+        <h1 class="section-title">Hydroelectric Power Plant Control System</h1>
+        <p class="lead">A hydroelectric power plant control system using Siemens TIA Portal, featuring sequence-driven operation, real-time process control, alarm handling, and HMI-based system interaction.</p>
+        <div style="display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem;">
+          <span class="chip" style="background: var(--accent-soft); color: #cbe7ff; border: 1px solid rgba(77, 181, 255, 0.2); padding: 0.55rem 0.8rem; border-radius: 999px; font-size: 0.85rem; font-weight: 500;">Siemens TIA Portal</span>
+          <span class="chip" style="background: var(--accent-soft); color: #cbe7ff; border: 1px solid rgba(77, 181, 255, 0.2); padding: 0.55rem 0.8rem; border-radius: 999px; font-size: 0.85rem; font-weight: 500;">PLC Programming (IEC 61131-3)</span>
+          <span class="chip" style="background: var(--accent-soft); color: #cbe7ff; border: 1px solid rgba(77, 181, 255, 0.2); padding: 0.55rem 0.8rem; border-radius: 999px; font-size: 0.85rem; font-weight: 500;">SCADA / HMI (WinCC)</span>
+          <span class="chip" style="background: var(--accent-soft); color: #cbe7ff; border: 1px solid rgba(77, 181, 255, 0.2); padding: 0.55rem 0.8rem; border-radius: 999px; font-size: 0.85rem; font-weight: 500;">Sequence Control</span>
+          <span class="chip" style="background: var(--accent-soft); color: #cbe7ff; border: 1px solid rgba(77, 181, 255, 0.2); padding: 0.55rem 0.8rem; border-radius: 999px; font-size: 0.85rem; font-weight: 500;">Analog I/O & Scaling</span>
+          <span class="chip" style="background: var(--accent-soft); color: #cbe7ff; border: 1px solid rgba(77, 181, 255, 0.2); padding: 0.55rem 0.8rem; border-radius: 999px; font-size: 0.85rem; font-weight: 500;">VFD Control (PIDs)</span>
+          <span class="chip" style="background: var(--accent-soft); color: #cbe7ff; border: 1px solid rgba(77, 181, 255, 0.2); padding: 0.55rem 0.8rem; border-radius: 999px; font-size: 0.85rem; font-weight: 500;">Alarm & Safety Systems</span>
+          <span class="chip" style="background: var(--accent-soft); color: #cbe7ff; border: 1px solid rgba(77, 181, 255, 0.2); padding: 0.55rem 0.8rem; border-radius: 999px; font-size: 0.85rem; font-weight: 500;">Fault Detection & Diagnostics</span>
+          <span class="chip" style="background: var(--accent-soft); color: #cbe7ff; border: 1px solid rgba(77, 181, 255, 0.2); padding: 0.55rem 0.8rem; border-radius: 999px; font-size: 0.85rem; font-weight: 500;">Commissioning & Testing</span>
+          <span class="chip" style="background: var(--accent-soft); color: #cbe7ff; border: 1px solid rgba(77, 181, 255, 0.2); padding: 0.55rem 0.8rem; border-radius: 999px; font-size: 0.85rem; font-weight: 500;">Interlocks & Protection Logic</span>
+          <span class="chip" style="background: var(--accent-soft); color: #cbe7ff; border: 1px solid rgba(77, 181, 255, 0.2); padding: 0.55rem 0.8rem; border-radius: 999px; font-size: 0.85rem; font-weight: 500;">Industrial Automation</span>
+        </div>
+      </div>
+
+      <div class="project-panel">
+        <div class="section-kicker">Table of Contents</div>
+        <h2>Navigate this project</h2>
+        <ul class="toc-list">
+          <li><a href="#overview">1. Project Overview</a></li>
+          <li><a href="#objectives">2. Engineering Objectives</a></li>
+          <li><a href="#architecture">3. System Architecture</a></li>
+          <li><a href="#control-philosophy">4. Control Philosophy</a></li>
+          <li><a href="#modes">5. Modes of Operation</a></li>
+          <li><a href="#plc-implementation">6. PLC Implementation</a></li>
+          <li><a href="#alarm-safety">7. Alarm and Safety Logic</a></li>
+          <li><a href="#pid-control">8. PID Control</a></li>
+          <li><a href="#technical-skills">9. Technical Skills Demonstrated</a></li>
+        </ul>
+      </div>
+
+      <div class="project-panel overview-panel" id="overview">
+        <div class="section-kicker">Section 1</div>
+        <h2>Project Overview</h2>
+        <p>This project focuses on the design and implementation of a hydroelectric power plant control system using Siemens TIA Portal. The system simulates a real-world industrial process where water flow is used to drive a turbine, generating electrical power while maintaining safe and stable operation.</p>
+        <p>The plant operates on a dynamically changing river flow, which is controlled using a baffle mechanism driven by an analog output signal. The controlled flow drives a turbine rotor, where rotational speed directly affects power generation. As the system operates, additional subsystems such as oil cooling, generator braking, and interlocks are actively managed to ensure safe performance.</p>
+        <div style="margin-top:1.5rem; margin-bottom:1.5rem; text-align:center;">
+          <img src="Pics/Hero.png" alt="Hero Image" style="max-width:70%; border-radius:18px; box-shadow:0 4px 24px rgba(0,0,0,0.18); margin-bottom:1.1rem;">
+          <div style="color:var(--muted); font-size:1.04rem; max-width:800px; margin:0 auto;">
+            An AI generated image that displays the hydroelectric power plant control system summarizing the key components and process flow. 
+          </div>
+        </div>
+        <p>The control system is responsible for coordinating multiple aspects of plant operation, including:</p>
+        <ul class="bullet-list overview-points">
+          <li>Hydroelectric process simulation with realistic plant behavior.</li>
+          <li>TIA Portal PLC logic for startup, run, shutdown, and fault states.</li>
+          <li>HMI screens for operator control, feedback, and alarm visibility.</li>
+          <li>Protection strategy including interlocks and braking conditions.</li>
+          <li>Commissioning-oriented structure for validation and diagnostics.</li>
+        </ul>
+        <p>The system is implemented using PLC-based control logic, with a strong focus on real-time decision making, process stability, and safety. An HMI interface is developed to provide operators with system visibility, manual control options, alarm management, and process monitoring.</p>
+        <p>This project reflects real-world industrial automation challenges, including analog signal scaling, sequence-based control, interlocks, and fault handling, making it representative of modern control systems used in power generation and process industries.</p>
+      </div>
+
+      <div class="project-panel objective-panel" id="objectives">
+        <div class="section-kicker">Section 2</div>
+        <h2>Engineering Objectives</h2>
+        <p>The objective of this project is to design and implement a complete industrial control system for a hydroelectric power plant, focusing on safe, stable, and automated operation under varying process conditions.</p>
+        <p>The project aims to achieve the following:</p>
+        <ul class="bullet-list">
+          <li>Develop PLC-based control logic to manage the full operational lifecycle of the plant, including startup, generation, cooldown, and shutdown sequences.</li>
+          <li>Implement sequence-driven control using structured state logic to ensure deterministic and repeatable system behaviour.</li>
+          <li>Design and integrate analog I/O processing, including signal scaling, calibration, and interpretation of real-time process variables.</li>
+          <li>Control actuator systems such as the baffle mechanism and oil pump using digital and analog outputs, including VFD-based speed control.</li>
+          <li>Implement comprehensive alarm handling and safety logic, including fault detection, delayed alarms, and defined shutdown responses.</li>
+          <li>Develop an operator-facing HMI system for monitoring, control, and alarm management, ensuring clear system visibility and usability.</li>
+          <li>Ensure safe operation through interlocks, emergency stop handling, and controlled system transitions during normal and fault conditions.</li>
+          <li>Simulate real-world industrial scenarios including fluctuating inputs, equipment constraints, and process limitations.</li>
+          <li>Apply structured testing and debugging methods to validate system performance and reliability.</li>
+        </ul>
+      </div>
+
+      <div class="project-panel" id="architecture">
+        <div class="section-kicker">Section 3</div>
+        <h2>System Architecture</h2>
+        <p>
+          The hydroelectric power plant is structured as a closed-loop industrial control system in which the PLC continuously monitors field inputs, evaluates operating conditions, and adjusts outputs to maintain safe and stable generation. The process begins with varying river flow entering the plant, where a baffle actuator regulates the amount of water passing through the turbine-generator assembly.
+        </p>
+        <p>
+          As water flow increases, rotor speed rises and electrical generation increases accordingly. To support operation, an oil pump driven through a VFD supplies lubrication and cooling to the rotor bearings. The PLC monitors oil flow, oil temperature, rotor speed, and generated power, then coordinates control actions such as baffle positioning, pump enable and speed control, brake engagement, station interlock status, and alarm response.
+        </p>
+
+        <div class="row g-4" style="margin-top: 0.5rem;">
+          <div class="col-md-6">
+            <div style="height: 100%; padding: 1.25rem; border-radius: 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);">
+              <h5 style="margin-bottom: 1rem; font-weight: 700;">Key Inputs to the PLC</h5>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>Rotor speed feedback (RPM)</li>
+                <li>Oil flow measurement (GPM)</li>
+                <li>Oil temperature feedback</li>
+                <li>Generated power / current feedback (kW)</li>
+                <li>E-Stop status</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div style="height: 100%; padding: 1.25rem; border-radius: 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);">
+              <h5 style="margin-bottom: 1rem; font-weight: 700;">Key Outputs from the PLC</h5>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>Baffle enable and analog position control</li>
+                <li>Oil pump VFD enable and speed reference</li>
+                <li>Power station interlock</li>
+                <li>Generator brake command</li>
+                <li>Alarm horn output</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <p style="margin-top: 1.25rem;">
+          This architecture reflects a realistic automation workflow in which analog input scaling, digital interlocks, actuator control, alarm handling, and operator visibility are all integrated into one control strategy. From a controls engineering perspective, the project combines process logic, safety response, and HMI supervision in a way that closely resembles real industrial systems.
+        </p>
+      </div>
+
+      <div class="project-panel" id="control-philosophy">
+        <div class="section-kicker">Section 4</div>
+        <h2>Control Philosophy</h2>
+        <p>
+          The control philosophy for this project was developed to ensure that the hydroelectric plant operates in a predictable, stable, and safe manner under both normal and abnormal conditions. Instead of controlling each device independently, I designed the system around coordinated operating modes, process-based transitions, and fault-driven protective actions.
+        </p>
+        <p>
+          The PLC continuously monitors key process variables such as rotor speed, oil flow, oil temperature, generated power, and emergency stop status. Based on these conditions, the controller determines when the plant is ready to start, when it can transition between modes, and when it must perform a controlled shutdown or fault response.
+        </p>
+
+        <div class="row g-4" style="margin-top: 0.5rem; margin-bottom: 1rem;">
+          <div class="col-lg-6">
+            <div style="height: 100%; padding: 1.2rem; border-radius: 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);">
+              <h5 style="margin-bottom: 1rem; font-weight: 700;">Operating Strategy</h5>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>Startup begins only when the system is in a valid and safe condition.</li>
+                <li>Warmup logic allows controlled rotor motion and oil circulation until temperature conditions are satisfied.</li>
+                <li>The plant then transitions into stabilization, where generation is increased until target output is reached.</li>
+                <li>Once stable, the interlock is engaged and the plant enters normal generation mode.</li>
+                <li>During shutdown, the plant follows a cooldown sequence to safely reduce speed and temperature before returning to idle.</li>
+                <li>Any alarm condition forces a defined protective response and transitions the plant into fault handling.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div style="height: 100%; padding: 1.2rem; border-radius: 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);">
+              <h5 style="margin-bottom: 1rem; font-weight: 700;">Fault Response Philosophy</h5>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>Fault conditions trigger a deterministic and repeatable shutdown response.</li>
+                <li>Protective actions include disengaging the station interlock, opening the baffle, commanding the brake, and disabling the VFD when required.</li>
+                <li>Alarm handling is integrated with process logic to prioritize safe equipment behaviour.</li>
+                <li>The operator is notified through alarm indication and horn activation on the HMI.</li>
+                <li>This approach reflects real industrial automation practices where safe-state design is built directly into the control strategy.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-4" style="margin-top: 0.5rem;">
+          <div class="col-lg-6">
+            <div style="text-align:center;">
+              <img src="Pics/Graph.png" alt="TIA Portal GRAPH sequence logic" style="max-height: 400px; border-radius:18px; box-shadow:0 4px 24px rgba(0,0,0,0.18);">
+              <div style="color:var(--muted); font-size:0.98rem; max-width:700px; margin:0.85rem auto 0;">
+                Sequence implementation in Siemens TIA Portal using GRAPH, showing the structured operating flow between startup, stabilization, generation, and cooldown.
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div style="text-align:center;">
+              <img src="Pics/HMI.png" alt="WinCC HMI system status screen" style="max-width:100%;  border-radius:18px; box-shadow:0 4px 24px rgba(0,0,0,0.18);">
+              <div style="color:var(--muted); font-size:0.98rem; max-width:700px; margin:0.85rem auto 0;">
+                WinCC HMI screen used to present operating mode, process values, alarms, and operator controls, supporting clear interaction with the control system.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p style="margin-top: 1.25rem;">
+          This part of the project demonstrates how I approached the system from a controls engineering perspective: defining process behaviour, building sequence-based operation, implementing safe transitions, and ensuring that both normal operation and abnormal events are handled in a structured way.
+        </p>
+      </div>
+
+      <div class="project-panel" id="modes">
+        <div class="section-kicker">Section 5</div>
+        <h2>Modes of Operation</h2>
+        <p>
+          A major part of this project was designing the plant around clearly defined operating modes instead of loosely connected device commands. This made the control system easier to understand, easier to troubleshoot, and more representative of real industrial automation practice. Each mode had a specific process objective, clear transition conditions, and defined output behaviour.
+        </p>
+        <p>
+          I implemented the operating logic so that the plant could move through startup, stabilization, power generation, cooldown, and fault handling in a structured sequence. This approach improved determinism in the PLC program and made system behaviour more transparent from both the programmer and operator perspective.
+        </p>
+
+        <div class="row g-4" style="margin-top: 0.5rem;">
+          <div class="col-md-6">
+            <div style="height: 100%; padding: 1.25rem; border-radius: 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);">
+              <h5 style="margin-bottom: 0.75rem; font-weight: 700;">1. Warmup</h5>
+              <p style="color: var(--muted); margin-bottom: 0.85rem;">
+                The sequence begins in Warmup after the operator issues a start command. In this mode, the rotor is allowed to turn at a controlled low speed while the oil pump runs at a low flow rate. The objective is to bring the system to a thermally ready condition before increasing load.
+              </p>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>Controlled low-speed rotor operation</li>
+                <li>Low oil pump output for initial circulation</li>
+                <li>Transition after oil temperature reaches operating threshold and remains stable</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div style="height: 100%; padding: 1.25rem; border-radius: 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);">
+              <h5 style="margin-bottom: 0.75rem; font-weight: 700;">2. Stabilize</h5>
+              <p style="color: var(--muted); margin-bottom: 0.85rem;">
+                Once the machine is warmed up, the system transitions into Stabilize. In this phase, generation is ramped up in a controlled way until the target output is achieved. The logic checks that the process remains within the allowable operating band before allowing the next transition.
+              </p>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>Increase generation toward desired output</li>
+                <li>Monitor process stability around target power</li>
+                <li>Transition only after output remains within tolerance for a defined period</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div style="height: 100%; padding: 1.25rem; border-radius: 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);">
+              <h5 style="margin-bottom: 0.75rem; font-weight: 700;">3. Generation</h5>
+              <p style="color: var(--muted); margin-bottom: 0.85rem;">
+                Generation is the normal running mode of the plant. In this state, the process is maintained at operating conditions and the station interlock is engaged so the plant can deliver output. The PLC continues to supervise all critical process variables and alarm conditions while maintaining stable operation.
+              </p>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>Normal production mode</li>
+                <li>Station interlock closed</li>
+                <li>Continuous monitoring of speed, flow, temperature, and generated power</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div style="height: 100%; padding: 1.25rem; border-radius: 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);">
+              <h5 style="margin-bottom: 0.75rem; font-weight: 700;">4. Cooldown</h5>
+              <p style="color: var(--muted); margin-bottom: 0.85rem;">
+                When a stop command is issued, the system does not simply shut off. Instead, it enters a controlled Cooldown mode where the interlock is opened, rotor speed is reduced, and oil circulation is maintained until the system temperature falls below a safe limit.
+              </p>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>Controlled reduction of speed</li>
+                <li>High oil flow maintained for equipment protection</li>
+                <li>Transition to Idle only after temperature falls below threshold</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div style="height: 100%; padding: 1.25rem; border-radius: 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);">
+              <h5 style="margin-bottom: 0.75rem; font-weight: 700;">5. Idle</h5>
+              <p style="color: var(--muted); margin-bottom: 0.85rem;">
+                Idle represents the safe non-running state of the plant. In this mode, the interlock is open, the baffle is de-energized, and the brake is engaged. This mode provides a stable resting condition until the next start request is issued.
+              </p>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>Safe resting state</li>
+                <li>Brake engaged</li>
+                <li>Interlock open and process outputs returned to non-running condition</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div style="height: 100%; padding: 1.25rem; border-radius: 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);">
+              <h5 style="margin-bottom: 0.75rem; font-weight: 700;">6. Fault</h5>
+              <p style="color: var(--muted); margin-bottom: 0.85rem;">
+                Fault mode handles abnormal operating conditions such as overspeed, overcurrent, high oil temperature, oil flow faults, brake failure, or emergency stop events. In this state, the normal sequence is aborted and the system executes a protective response designed to place the plant into a safe condition.
+              </p>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>Sequence abort on abnormal conditions</li>
+                <li>Protective actions applied automatically</li>
+                <li>Operator alerted through alarms and fault indication</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <p style="margin-top: 1.25rem;">
+          Structuring the project around these modes helped demonstrate more than just PLC programming. It showed how I think about automation systems in terms of process states, transition logic, operator visibility, and safe machine behaviour — which is exactly how industrial control systems are designed in practice.
+        </p>
+      </div>
+
+      <div class="project-panel" id="plc-implementation">
+        <div class="section-kicker">Section 6</div>
+        <h2>PLC Implementation</h2>
+        <p>
+          The PLC implementation was developed in Siemens TIA Portal with a focus on structured logic, maintainability, and clear separation between sequence control, device control, alarm handling, and operator interaction. Rather than building the program as disconnected rungs, I treated it as an integrated industrial control system in which each part of the logic had a defined purpose within the overall plant behaviour.
+        </p>
+        <p>
+          I used Ladder Logic for core device control, permissives, interlocks, alarm handling, and discrete process actions, while Siemens GRAPH was used to implement the sequence-driven operating modes of the plant. This combination allowed the system to remain both readable and scalable: Ladder Logic handled the low-level execution and safety behaviour, while GRAPH provided a clean framework for startup, stabilization, generation, cooldown, and fault-related transitions.
+        </p>
+
+        <div style="margin-top:1.5rem; text-align:center;">
+          <img src="Pics/Warmup_Logic.png" alt="TIA Portal PLC logic implementation" style="max-width:60%; border-radius:18px; box-shadow:0 4px 24px rgba(0,0,0,0.18);">
+          <div style="color:var(--muted); font-size:0.98rem; max-width:70%; margin:0.85rem auto 0;">
+            PLC implementation in Siemens TIA Portal, combining structured Ladder Logic, sequence control, device interlocks, and monitoring logic for safe and repeatable plant operation.
+          </div>
+        </div>
+
+        <div class="row g-4" style="margin-top: 0.5rem;">
+          <div class="col-lg-6">
+            <div style="height: 100%; padding: 1.25rem; border-radius: 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);">
+              <h5 style="margin-bottom: 1rem; font-weight: 700;">Core PLC Work</h5>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>Implemented Ladder Logic for device commands, permissives, interlocks, and shutdown actions</li>
+                <li>Built sequence-based control using Siemens GRAPH for mode transitions</li>
+                <li>Programmed HOA logic for manual, off, and automatic operation</li>
+                <li>Created alarm logic with delay timers, inhibit conditions, and horn behaviour</li>
+                <li>Integrated analog and digital I/O into one coordinated control strategy</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div style="height: 100%; padding: 1.25rem; border-radius: 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);">
+              <h5 style="margin-bottom: 1rem; font-weight: 700;">Engineering Approach</h5>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>Structured logic for easier troubleshooting and readability</li>
+                <li>Tag-based design to support HMI integration and configurable setpoints</li>
+                <li>Use of watch tables for commissioning, simulation, and debugging</li>
+                <li>Clear separation between sequence logic, process logic, and alarm response</li>
+                <li>Designed for deterministic and repeatable plant behaviour</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:1.5rem; text-align:center;">
+          <img src="Pics/Scaling.png" alt="TIA Portal PLC logic implementation" style="max-width:60%; border-radius:18px; box-shadow:0 4px 24px rgba(0,0,0,0.18);">
+          <div style="color:var(--muted); font-size:0.98rem; max-width:70%; margin:0.85rem auto 2rem;">
+            This function block was used to scale raw PLC input values into engineering units and convert operator-defined values back into usable control signals.
+          </div>
+        </div>
+
+        <p style="margin-top: 1.25rem;">
+          A major part of the implementation involved translating process requirements into practical PLC logic. This included handling analog signal scaling for field values such as rotor speed, oil flow, oil temperature, and generated power, while also generating output references for devices like the baffle actuator and oil pump VFD. Since the project brief defined both raw PLC ranges and engineering-unit display values, the logic had to correctly convert between machine-level signals and operator-facing process values.
+        </p>
+
+        <div style="margin-top:1.5rem; text-align:center;">
+          <img src="Pics/Hoa.png" alt="TIA Portal PLC logic implementation" style="max-width:60%; border-radius:18px; box-shadow:0 4px 24px rgba(0,0,0,0.18);">
+          <div style="color:var(--muted); font-size:0.98rem; max-width:80%; margin:0.85rem auto 2rem;">
+            This ladder logic shows the implementation of HOA (Hand-Off-Auto) mode selection for the oil pump VFD. Building HOA this way made the control strategy easy to troubleshoot, easy to integrate with the HMI, and consistent with real industrial practice where operators need both manual control capability and automatic sequence-based operation.
+          </div>
+        </div>
+
+        <p>
+          I also implemented control features commonly seen in industrial automation projects, including HOA-based device control, alarm-driven shutdown actions, configurable setpoints and timers, sequence interlocks, and process monitoring structures that supported HMI visibility. In addition, watch tables were used extensively during testing to validate transitions, monitor internal tags, and troubleshoot behaviour under changing simulated process conditions.
+        </p>
+
+        <div style="margin-top:1.5rem; text-align:center;">
+          <img src="Pics/WatchTable.png" alt="TIA Portal PLC logic implementation" style="max-width:60%; border-radius:18px; box-shadow:0 4px 24px rgba(0,0,0,0.18);">
+          <div style="color:var(--muted); font-size:0.98rem; max-width:80%; margin:0.85rem auto 1rem;">
+            Watch tables were used to monitor live tags, force values, and validate system behaviour during testing and commissioning.
+          </div>
+        </div>
+
+        <p>
+          From a controls engineering standpoint, this section of the project best represents the practical development work: building logic that is not only functional, but also organized in a way that supports commissioning, operator interaction, and future expansion. It reflects the kind of structured PLC programming approach used in real industrial automation environments.
+        </p>
+
+      </div>
+
+      <div class="project-panel" id="alarm-safety">
+        <div class="section-kicker">Section 7</div>
+        <h2>Alarm and Safety Logic</h2>
+        <p>
+          Alarm handling in this project was designed as both a protection feature and an operator workflow. Instead of using alarms only for indication, I built the logic so that abnormal process conditions were detected in the PLC, acted upon through defined safety responses, and then presented to the operator through the HMI for acknowledgement and reset.
+        </p>
+        <p>
+          The PLC continuously monitored key fault conditions such as overcurrent, high oil temperature, overspeed, oil flow issues, brake failure, and emergency stop status. Depending on the alarm type, the logic applied either immediate response or timer-based delay logic before latching the alarm. Once active, the alarm could trigger protective actions such as disengaging the interlock, stopping the VFD, opening the baffle, engaging the brake, and activating the horn.
+        </p>
+        <p>
+          On the HMI side, the operator was given a dedicated alarm management screen to view active alarms, review alarm history, and interact with alarm controls such as silence and reset. The intended workflow was that the operator first identifies and corrects the root cause of the fault, then acknowledges or silences the alarm as needed, and finally performs a reset to clear the alarm state once the fault condition has been removed.
+        </p>
+
+        <div class="row g-4" style="margin-top: 0.75rem;">
+          <div class="col-lg-6">
+            <div style="height: 100%; padding: 1.25rem; border-radius: 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);">
+              <h5 style="margin-bottom: 1rem; font-weight: 700;">PLC Alarm Behaviour</h5>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>Detection of abnormal operating conditions</li>
+                <li>Timer-based delay logic where required</li>
+                <li>Alarm latching and notification bit generation</li>
+                <li>Protective output actions tied to fault conditions</li>
+                <li>Reset logic to clear alarms only after fault removal</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div style="height: 100%; padding: 1.25rem; border-radius: 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);">
+              <h5 style="margin-bottom: 1rem; font-weight: 700;">Operator Alarm Workflow</h5>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>View active alarms and alarm history on the HMI</li>
+                <li>Identify the faulted condition</li>
+                <li>Correct the underlying process or equipment issue</li>
+                <li>Use silence or acknowledgement controls as needed</li>
+                <li>Reset the alarm after the condition is no longer present</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <p style="margin-top: 1.25rem;">
+          This approach made the alarm system more realistic from an industrial automation perspective. It demonstrated not only how faults are detected in PLC logic, but also how operators interact with alarmed conditions in a controlled and structured way. That combination of PLC-side protection and HMI-side usability was an important part of making the project feel like a complete control system rather than only a simulation.
+        </p>
+
+        <div class="row g-4" style="margin-top:1rem;">
+          <div class="col-lg-6">
+            <div style="text-align:center;">
+              <img src="Pics/AlarmLadderLogic.png" alt="Alarm ladder logic in TIA Portal" style="max-width:100%; border-radius:18px; box-shadow:0 4px 24px rgba(0,0,0,0.18);">
+              <div style="color:var(--muted); font-size:0.98rem; max-width:760px; margin:0.85rem auto 0;">
+                This ladder logic shows the implementation of overcurrent alarm handling, including timer-based fault detection, alarm latching, notification generation, and reset/silence behaviour within the PLC.
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div style="text-align:center;">
+              <img src="Pics/AlarmHMI.png" alt="Alarm management HMI screen" style="max-width:100%; border-radius:18px; box-shadow:0 4px 24px rgba(0,0,0,0.18);">
+              <div style="color:var(--muted); font-size:0.98rem; max-width:760px; margin:0.85rem auto 0;">
+                The alarm management screen allowed the operator to monitor active alarms, review alarm history, silence notifications, and reset alarms after the fault condition had been corrected.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-panel" id="pid-control">
+        <div class="section-kicker">Section 8</div>
+        <h2>PID Control Strategy</h2>
+        <p>
+          In addition to sequence logic and discrete control, I also implemented PID-based control for key analog process functions in the plant. This was used primarily for baffle control and oil pump VFD control, where the system needed to respond continuously to changing process conditions instead of relying only on fixed output commands.
+        </p>
+        <p>
+          The PID strategy helped make the plant behaviour more stable and more representative of a real industrial control system. For the baffle, PID control supported smoother adjustment of water flow to influence the process dynamically. For the oil pump VFD, PID control was used to regulate output more intelligently based on operating feedback, improving how the lubrication and cooling subsystem responded during plant operation.
+        </p>
+
+        <div class="row g-4" style="margin-top: 0.5rem;">
+          <div class="col-lg-6">
+            <div style="height: 100%; padding: 1.25rem; border-radius: 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);">
+              <h5 style="margin-bottom: 1rem; font-weight: 700;">Where PID Was Applied</h5>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>Baffle control for continuous process adjustment</li>
+                <li>Oil pump VFD control for regulated output response</li>
+                <li>Closed-loop behaviour using live feedback and setpoints</li>
+                <li>Reduced dependence on abrupt manual output changes</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div style="height: 100%; padding: 1.25rem; border-radius: 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);">
+              <h5 style="margin-bottom: 1rem; font-weight: 700;">Engineering Value</h5>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>Improved process stability under changing plant conditions</li>
+                <li>Provided smoother actuator response</li>
+                <li>Supported more realistic industrial control behaviour</li>
+                <li>Strengthened practical experience with Siemens PID tools and tuning</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <p style="margin-top: 1.25rem;">
+          The implementation was carried out using Siemens PID functionality inside TIA Portal, where the controller was integrated into the PLC logic and connected to live process values, setpoints, and output references. I also worked with PID tuning tools to observe controller response, compare setpoint versus measured input, and refine the behaviour of the loop for more stable operation.
+        </p>
+
+        <div class="row g-4" style="margin-top:1rem;">
+          <div class="col-lg-6">
+            <div style="text-align:center;">
+              <img src="Pics/PID.png" alt="PID Compact block in TIA Portal" style="max-width:100%; border-radius:18px; box-shadow:0 4px 24px rgba(0,0,0,0.18);">
+              <div style="color:var(--muted); font-size:0.98rem; max-width:760px; margin:0.85rem auto 0;">
+                PID_Compact block implementation in TIA Portal used to regulate analog process behaviour through setpoint, feedback, and output control.
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div style="text-align:center;">
+              <img src="Pics/FineTuningPID.png" alt="PID fine tuning and trend response in TIA Portal" style="max-width:100%; border-radius:18px; box-shadow:0 4px 24px rgba(0,0,0,0.18);">
+              <div style="color:var(--muted); font-size:0.98rem; max-width:760px; margin:0.85rem auto 0;">
+                PID fine-tuning view showing setpoint, scaled input, and controller output during closed-loop response analysis and tuning.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p style="margin-top: 1.25rem;">
+          This part of the project helped demonstrate that my controls work was not limited to sequence logic and alarms alone. It also included closed-loop control concepts, tuning, and analog process regulation — all of which are important in real industrial automation systems.
+        </p>
+      </div>
+
+      <div class="project-panel" id="technical-skills">
+        <div class="section-kicker">Section 9</div>
+        <h2>Key Technical Skills Demonstrated</h2>
+        <p>
+          This project brought together multiple areas of industrial automation and controls engineering, from PLC programming and sequence design to HMI development, alarm handling, and commissioning-oriented testing. It reflects both technical implementation ability and practical engineering thinking.
+        </p>
+
+        <div class="row g-4" style="margin-top: 0.75rem;">
+          <div class="col-md-6 col-lg-4">
+            <div style="height:100%; padding:1.1rem; border-radius:18px; background: rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);">
+              <h5 style="font-weight:700; margin-bottom:0.8rem;">PLC & Control</h5>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>Siemens TIA Portal</li>
+                <li>Ladder Logic</li>
+                <li>GRAPH sequence control</li>
+                <li>PID control concepts</li>
+                <li>Interlocks and permissives</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div style="height:100%; padding:1.1rem; border-radius:18px; background: rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);">
+              <h5 style="font-weight:700; margin-bottom:0.8rem;">HMI & Operations</h5>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>WinCC HMI development</li>
+                <li>Alarm management</li>
+                <li>Operator interface design</li>
+                <li>HOA control strategy</li>
+                <li>Process monitoring</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div style="height:100%; padding:1.1rem; border-radius:18px; background: rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);">
+              <h5 style="font-weight:700; margin-bottom:0.8rem;">Commissioning & Validation</h5>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>Analog I/O scaling</li>
+                <li>Watch tables</li>
+                <li>Testing and debugging</li>
+                <li>Fault handling</li>
+                <li>Structured troubleshooting</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <p style="margin-top: 1.25rem;">
+          Overall, this project demonstrates my ability to design and implement an industrial-style automation system using Siemens tools, while also thinking through operator interaction, safety response, process behaviour, and maintainable PLC structure.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="container d-flex flex-column flex-md-row justify-content-between gap-2 footer-bar">
+      <span>&copy; 2026 Nitin Kumar</span>
+      <span>Industrial Automation - Controls Software - Technical Engineering</span>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+</body>
+</html>

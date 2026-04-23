@@ -625,6 +625,10 @@
             <i class='bx bx-grid-alt'></i>
             View Experience
           </a>
+          <a href="projects.html" class="btn-ghost">
+            <i class='bx bx-layout'></i>
+            View Projects
+          </a>
         </div>
 
         <div class="hero-tags">
@@ -652,25 +656,26 @@
     <div class="container">
       <div class="section-heading">
         <div class="section-kicker">Featured Automation Work</div>
-        <h2 class="section-title">Conveyor Automation Project</h2>
+        <h2 class="section-title">Hydroelectric Power Plant Automation Project</h2>
       </div>
 
       <div class="row g-4 align-items-stretch">
         <div class="col-lg-7">
           <div class="project-highlight">
-            <h3>Conveyor Control System with Virtual PLC, OPC UA, and HMI-Style Simulation</h3>
+            <h3>Hydroelectric Power Plant Automation with PLC Sequencing, HMI, Alarms, and PID Control</h3>
             <p></p>
-        <p>
-              Developed an end-to-end conveyor control project in which a box is detected by two sensors, starts conveyor movement on first detection, and stops at the second sensor based on defined control logic. The system links a Unity-based simulation with CODESYS through OPC UA, demonstrating real-time communication, control sequencing, and process visualisation across an industrial-style workflow.
+            <p>
+              Developed an industrial-style hydroelectric power plant automation project using Siemens TIA Portal and WinCC. The system was designed around sequence-based plant operation, HMI interaction, alarm handling, HOA control, analog signal scaling, PID-based control, and structured fault response to reflect practical industrial automation workflows.
             </p>
             <ul>
-              <li>Implemented sensor-based control logic for conveyor start/stop sequencing and repeatable system behaviour.</li>
-              <li>Integrated Unity and CODESYS using OPC UA to enable real-time communication between simulation and control logic.</li>
-              <li>Applied industrial automation concepts including PLC-style sequencing, HMI-oriented visualisation, testing, and debugging.</li>
-              <li>Demonstrates practical skills relevant to controls, industrial automation, commissioning support, and system integration roles.</li>
+              <li>Implemented PLC logic for plant modes including startup, stabilization, generation, cooldown, idle, and fault handling.</li>
+              <li>Built WinCC HMI screens for system status, alarm management, operator control, and process monitoring.</li>
+              <li>Applied industrial control concepts including Ladder Logic, GRAPH sequencing, PID control, HOA strategy, and analog I/O scaling.</li>
+              <li>Used watch tables, online monitoring, and structured debugging methods to test logic behaviour and validate process response.</li>
+              <li>Demonstrates practical skills relevant to controls engineering, industrial automation, commissioning, and PLC/HMI integration roles.</li>
             </ul>
             <div class="text-center mt-5">
-              <a href="DetailedProjects/Conveyor/conveyor.html" class="btn-main">View Full Project</a>
+              <a href="DetailedProjects/PowerPlant/powerplant.html" class="btn-main">View Full Project</a>
             </div>
           </div>
         </div>
@@ -681,12 +686,16 @@
             <p></p>
             <div class="image-grid mt-4">
               <div class="image-container">
-                <img src="Projects/LadderLogic.png" alt="Ladder Logic Diagram" class="project-image">
-                <p class="image-description">Ladder Logic Diagram: Illustrates the control logic used in the CODESYS environment for sensor and motor sequencing.</p>
+                <img src="Projects/FineTuningPID.png" alt="PID Tuning in TIA Portal" class="project-image">
+                <p class="image-description">
+                  PID Tuning in TIA Portal: Shows closed-loop control tuning for the plant, including setpoint, process feedback, and controller output response.
+                </p>
               </div>
               <div class="image-container">
-                <img src="Projects/conveyor.png" alt="Conveyor System Diagram" class="project-image">
-                <p class="image-description">Conveyor System Diagram: Shows the Unity simulation setup with sensors and conveyor belt integration.</p>
+                <img src="Projects/powerplant.png" alt="Hydroelectric Power Plant Overview" class="project-image">
+                <p class="image-description">
+                  Hydroelectric Power Plant Overview: An AI generated image showing the plant concept and major subsystems involved in control and monitoring.
+                </p>
               </div>
             </div>
           </div>
