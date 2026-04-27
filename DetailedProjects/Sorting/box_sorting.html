@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Factory IO Box Sorting System | Detailed Project</title>
+  <meta name="description" content="Detailed breakdown of a Factory IO PLC-based box sorting project by Nitin Kumar, using Ladder Logic, Structured Text, FIFO tracking, sensors, conveyors, and turntable control." />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --bg-soft: #111823;
+      --panel: rgba(17, 24, 35, 0.78);
+      --panel-border: rgba(255, 255, 255, 0.08);
+      --text: #e8eef7;
+      --muted: #9fb0c3;
+      --accent: #4db5ff;
+      --accent-soft: rgba(77, 181, 255, 0.14);
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(77, 181, 255, 0.12), transparent 28%),
+        radial-gradient(circle at top right, rgba(115, 226, 167, 0.08), transparent 22%),
+        linear-gradient(180deg, #081018 0%, #0b0f14 35%, #0e141d 100%);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .navbar {
+      background: rgba(8, 16, 24, 0.76);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 0.9rem 0;
+    }
+
+    .navbar-brand {
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.95rem;
+    }
+
+    .nav-link {
+      color: var(--muted) !important;
+      font-weight: 500;
+      transition: 0.2s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus {
+      color: var(--text) !important;
+    }
+
+    .section-heading {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .section-kicker {
+      color: var(--accent);
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      margin-bottom: 0.85rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .lead {
+      color: var(--muted);
+      max-width: 860px;
+      margin: 0.9rem auto 0;
+      line-height: 1.8;
+    }
+
+    .project-panel {
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 2rem 2.2rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .project-panel h2 {
+      font-size: clamp(1.4rem, 2.3vw, 2rem);
+      font-weight: 700;
+      margin-bottom: 0.85rem;
+    }
+
+    .project-panel p {
+      color: var(--muted);
+      margin-bottom: 1rem;
+      line-height: 1.75;
+    }
+
+    .overview-panel {
+      padding: 2.4rem 2.4rem;
+    }
+
+    .overview-panel p:last-of-type {
+      margin-bottom: 0.6rem;
+    }
+
+    .overview-points {
+      margin: 1rem 0 1.15rem;
+    }
+
+    .objective-panel p{
+      margin-bottom: 1rem;
+    }
+
+    .toc-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.85rem;
+      align-items: stretch;
+    }
+
+    .toc-list a {
+      display: block;
+      padding: 0.95rem 1rem;
+      min-height: 52px;
+      border-radius: 12px;
+      border: 1px solid rgba(77, 181, 255, 0.22);
+      background: rgba(77, 181, 255, 0.08);
+      color: #cfe9ff;
+      font-weight: 600;
+      transition: 0.2s ease;
+    }
+
+    .toc-list a:hover {
+      background: rgba(77, 181, 255, 0.16);
+      transform: translateX(2px);
+    }
+
+    .bullet-list {
+      margin: 0.5rem 1.5rem 0.85rem;
+      padding-left: 1rem;
+      color: #cfe9ff;
+      line-height: 1.75;
+    }
+
+    .chip {
+      background: var(--accent-soft);
+      color: #cbe7ff;
+      border: 1px solid rgba(77, 181, 255, 0.2);
+      padding: 0.55rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .image-caption {
+      color: var(--muted);
+      font-size: 0.98rem;
+      max-width: 760px;
+      margin: 0.85rem auto 0;
+      line-height: 1.65;
+    }
+
+    .code-card {
+      background: rgba(0, 0, 0, 0.24);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 1.1rem;
+      margin-top: 1rem;
+      overflow-x: auto;
+    }
+
+    .code-card pre {
+      color: #d9ecff;
+      margin: 0;
+      font-size: 0.9rem;
+      line-height: 1.55;
+      white-space: pre-wrap;
+    }
+
+    footer {
+      margin-top: 2.4rem;
+    }
+
+    .footer-bar {
+      padding: 1.2rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    @media (max-width: 767px) {
+      .project-panel {
+        padding: 1.6rem 1.2rem;
+      }
+
+      .toc-list {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="../../index.html">Nitin Kumar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="../../index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="../../experience.html">Experience</a></li>
+          <li class="nav-item"><a class="nav-link" href="../../projects.html">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://www.linkedin.com/in/r-nitin-kumar/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section style="padding-top: 6.5rem;">
+    <div class="container">
+      <div class="section-heading">
+        <div class="section-kicker">Project Case Study</div>
+        <h1 class="section-title">Factory IO Box Sorting System</h1>
+        <p class="lead">A PLC-based material handling project that sorts multiple boxes by size in Factory IO using Ladder Logic, Structured Text, sensor-based tracking, FIFO memory, conveyor control, and turntable unloading logic.</p>
+        <div style="display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem;">
+          <span class="chip">Factory IO</span>
+          <span class="chip">PLC Programming</span>
+          <span class="chip">Ladder Logic</span>
+          <span class="chip">Structured Text</span>
+          <span class="chip">IEC 61131-3</span>
+          <span class="chip">FIFO Queue Logic</span>
+          <span class="chip">Conveyor Control</span>
+          <span class="chip">Turntable Sorting</span>
+          <span class="chip">Sensor Integration</span>
+          <span class="chip">One-Shot / Edge Detection</span>
+          <span class="chip">Industrial Automation</span>
+        </div>
+        <iframe style="margin-top: 2%;" width="560" height="315" src="https://www.youtube.com/embed/qc7zFnujAhM?si=Nhg01-IHSXFi0003&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+
+      <div class="project-panel">
+        <div class="section-kicker">Table of Contents</div>
+        <h2>Navigate this project</h2>
+        <ul class="toc-list">
+          <li><a href="#overview">1. Project Overview</a></li>
+          <li><a href="#objectives">2. Engineering Objectives</a></li>
+          <li><a href="#architecture">3. System Architecture</a></li>
+          <li><a href="#control-philosophy">4. Control Philosophy</a></li>
+          <li><a href="#sequence">5. Sorting Sequence</a></li>
+          <li><a href="#fifo">6. FIFO Tracking Logic</a></li>
+          <li><a href="#plc-implementation">7. PLC Implementation</a></li>
+          <li><a href="#technical-skills">8. Technical Skills Demonstrated</a></li>
+        </ul>
+      </div>
+
+      <div class="project-panel overview-panel" id="overview">
+        <div class="section-kicker">Section 1</div>
+        <h2>Project Overview</h2>
+        <p>This project focuses on designing and implementing an automated box sorting system in Factory IO using PLC logic. The system detects boxes on a conveyor, classifies each box as big or small, tracks the classification while multiple boxes move through the system, and then routes each box to the correct unloading path using a turntable mechanism.</p>
+        <p>The main engineering challenge was not simply detecting one box, but reliably sorting multiple boxes that may be on the conveyor at the same time. Since the size detection sensors and the unload turntable are physically separated, the PLC must remember the classification of each box after it leaves the sensor area and recall the correct value when that same box reaches the sorting point.</p>
+        <div style="margin-top:1.5rem; margin-bottom:1.5rem; text-align:center;">
+          <img src="Pics/Overview.png" alt="Factory IO box sorting system overview" style="max-width:70%; border-radius:18px; box-shadow:0 4px 24px rgba(0,0,0,0.18); margin-bottom:1.1rem;">
+          <div class="image-caption">
+            Factory IO box sorting cell showing the conveyor path, size detection area, and unload turntable used to separate boxes based on detected size.
+          </div>
+        </div>
+        <p>The control system is responsible for coordinating several machine functions:</p>
+        <ul class="bullet-list overview-points">
+          <li>Starting and stopping the entry and feeder conveyors.</li>
+          <li>Detecting box size using discrete sensors.</li>
+          <li>Storing each box classification in the correct order using FIFO logic.</li>
+          <li>Triggering unload and turntable movement at the correct time.</li>
+          <li>Routing big and small boxes to their assigned paths.</li>
+          <li>Handling multiple boxes on the belt without losing box identity.</li>
+        </ul>
+        <p>The final solution combines Ladder Logic for machine control and a reusable Structured Text function block for FIFO tracking. This makes the program more modular, easier to debug, and closer to how reusable logic is built in real industrial automation projects.</p>
+      </div>
+
+      <div class="project-panel objective-panel" id="objectives">
+        <div class="section-kicker">Section 2</div>
+        <h2>Engineering Objectives</h2>
+        <p>The objective of this project was to create a reliable PLC-based box sorting system that could handle continuous material flow instead of only single-box operation.</p>
+        <p>The project aims to achieve the following:</p>
+        <ul class="bullet-list">
+          <li>Develop conveyor control logic for entry and feeder conveyors using start permissives and machine-ready conditions.</li>
+          <li>Detect and classify boxes as big or small using sensor feedback from the Factory IO scene.</li>
+          <li>Implement memory-based tracking so that each box classification remains associated with the correct physical box.</li>
+          <li>Create a reusable FIFO function block in Structured Text that can be called from Ladder Logic.</li>
+          <li>Use rising-edge detection to prevent a single box from being pushed or popped multiple times while it remains in front of a sensor.</li>
+          <li>Coordinate turntable actuation and unload timing using timer-based logic.</li>
+          <li>Make the program scalable so more boxes can be tracked without rewriting the sorting logic.</li>
+          <li>Validate the logic under realistic conditions with several boxes on the conveyor at the same time.</li>
+        </ul>
+      </div>
+
+      <div class="project-panel" id="architecture">
+        <div class="section-kicker">Section 3</div>
+        <h2>System Architecture</h2>
+        <p>The system is structured around a conveyor-based material handling process. Boxes enter the system through the entry conveyor and feeder conveyor, pass through the size detection area, continue along the belt, and eventually arrive at the unload turntable. The PLC continuously evaluates sensor states, tracks stored box types, and commands the correct actuator response.</p>
+        <p>Because the size sensors and unloading station are separated by distance, the control system uses a queue-based architecture. When a box is measured, its classification is pushed into FIFO memory. When a box reaches the sorting point, the oldest stored value is popped from FIFO memory and used as the sorting decision for that box.</p>
+
+        <div class="row g-4" style="margin-top: 0.5rem;">
+          <div class="col-md-6">
+            <div style="height: 100%; padding: 1.25rem; border-radius: 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);">
+              <h5 style="margin-bottom: 1rem; font-weight: 700;">Key Inputs to the PLC</h5>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>Start command</li>
+                <li>Box present sensor at the size detection point</li>
+                <li>Big box detection sensor</li>
+                <li>Small box detection sensor</li>
+                <li>Box present sensor at the unload / sorting point</li>
+                <li>Turntable ready or can-turn feedback</li>
+                <li>FIFO reset command for commissioning and restart conditions</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div style="height: 100%; padding: 1.25rem; border-radius: 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);">
+              <h5 style="margin-bottom: 1rem; font-weight: 700;">Key Outputs from the PLC</h5>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>Entry conveyor run command</li>
+                <li>Feeder conveyor run command</li>
+                <li>Turntable actuator command</li>
+                <li>Unload start command</li>
+                <li>Big box route command</li>
+                <li>Small box route command</li>
+                <li>FIFO diagnostic outputs: empty, full, count, push error, and pop error</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <p style="margin-top: 1.25rem;">This architecture separates the machine into clear responsibilities: sensors identify the box, FIFO memory tracks the box, and the unload logic acts only when the physical box reaches the sorting station. This separation made the system easier to troubleshoot and allowed the sorting logic to remain stable even when multiple boxes were present on the belt.</p>
+      </div>
+
+      <div class="project-panel" id="control-philosophy">
+        <div class="section-kicker">Section 4</div>
+        <h2>Control Philosophy</h2>
+        <p>The control philosophy for this project was based on deterministic material tracking. Instead of making the sorting decision from the current state of the size sensors, the PLC records the box type at the detection point and uses that stored value later when the same box reaches the unload turntable.</p>
+        <p>This approach is important because the sensor area and sorting area are far apart. By the time a box reaches the turntable, the size sensors may already be detecting a different box. Without memory, the PLC could incorrectly assign the newest sensor reading to the wrong physical box.</p>
+
+        <div class="row g-4" style="margin-top: 0.5rem; margin-bottom: 1rem;">
+          <div class="col-lg-6">
+            <div style="height: 100%; padding: 1.2rem; border-radius: 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);">
+              <h5 style="margin-bottom: 1rem; font-weight: 700;">Tracking Strategy</h5>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>When a box reaches the size sensor, the PLC determines whether it is big or small.</li>
+                <li>The detected value is stored in the FIFO queue using a push command.</li>
+                <li>Each stored value remains in order while boxes travel toward the unload point.</li>
+                <li>When a box reaches the unload sensor, the FIFO returns the oldest stored value using a pop command.</li>
+                <li>The popped value controls the turntable and sorting route for the box currently at the unload station.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div style="height: 100%; padding: 1.2rem; border-radius: 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);">
+              <h5 style="margin-bottom: 1rem; font-weight: 700;">Why FIFO Was Used</h5>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>The first box detected is also the first box that reaches the sorting point.</li>
+                <li>FIFO preserves this first-in, first-out order naturally.</li>
+                <li>The system can handle several boxes between the sensors and the turntable.</li>
+                <li>The logic is more robust than using timer-only tracking when box spacing changes.</li>
+                <li>The function block can be reused in other conveyor or material tracking projects.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:1.5rem; text-align:center;">
+          <img src="Pics/FIFO.png" alt="FIFO function block call in Ladder Logic" style="max-width:75%; border-radius:18px; box-shadow:0 4px 24px rgba(0,0,0,0.18);">
+          <div class="image-caption">
+            Ladder Logic call of the FIFO function block, where size detection pushes the box type and the unload station pops the next sorting decision.
+          </div>
+        </div>
+
+        <p style="margin-top: 1.25rem;">This made the project behave much closer to an industrial conveyor tracking system, where objects are identified upstream and routed downstream after a delay caused by conveyor travel distance.</p>
+      </div>
+
+      <div class="project-panel" id="sequence">
+        <div class="section-kicker">Section 5</div>
+        <h2>Sorting Sequence</h2>
+        <p>The sorting sequence was designed so that each step has a clear trigger and a clear control action. This prevents the PLC from mixing sensor states from different parts of the conveyor and makes the process easier to troubleshoot during commissioning.</p>
+
+        <div class="row g-4" style="margin-top: 0.5rem;">
+          <div class="col-md-6">
+            <div style="height: 100%; padding: 1.25rem; border-radius: 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);">
+              <h5 style="margin-bottom: 0.75rem; font-weight: 700;">1. Conveyor Startup</h5>
+              <p style="color: var(--muted); margin-bottom: 0.85rem;">The entry conveyor and feeder conveyor are enabled when the system receives a start command and the machine is ready to run.</p>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>Start command energizes conveyor outputs</li>
+                <li>Conveyors move boxes toward the detection area</li>
+                <li>Machine-ready permissives prevent invalid motion</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div style="height: 100%; padding: 1.25rem; border-radius: 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);">
+              <h5 style="margin-bottom: 0.75rem; font-weight: 700;">2. Size Detection</h5>
+              <p style="color: var(--muted); margin-bottom: 0.85rem;">When a box reaches the size detection sensors, the PLC determines whether the box is big or small.</p>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>Big box is represented as value 1</li>
+                <li>Small box is represented as value 0</li>
+                <li>Detection is converted into one FIFO push event</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div style="height: 100%; padding: 1.25rem; border-radius: 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);">
+              <h5 style="margin-bottom: 0.75rem; font-weight: 700;">3. FIFO Tracking</h5>
+              <p style="color: var(--muted); margin-bottom: 0.85rem;">The size value is pushed into the FIFO queue and remains stored while the physical box travels toward the unload station.</p>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>Each box classification is stored in order</li>
+                <li>Several boxes can be tracked at the same time</li>
+                <li>FIFO count provides a useful diagnostic value</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div style="height: 100%; padding: 1.25rem; border-radius: 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);">
+              <h5 style="margin-bottom: 0.75rem; font-weight: 700;">4. Unload and Route</h5>
+              <p style="color: var(--muted); margin-bottom: 0.85rem;">When the box reaches the unload sensor, the PLC pops the next stored FIFO value and commands the route for that box.</p>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>Value 1 routes the box to the big box path</li>
+                <li>Value 0 routes the box to the small box path</li>
+                <li>Turntable timing controls the unload action</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <p style="margin-top: 1.25rem;">This sequence allowed the system to sort continuously instead of relying on one box being fully completed before the next one enters the conveyor.</p>
+      </div>
+
+      <div class="project-panel" id="fifo">
+        <div class="section-kicker">Section 6</div>
+        <h2>FIFO Tracking Logic</h2>
+        <p>The FIFO function block is the core of the multi-box tracking solution. It stores integer values in a circular buffer and exposes useful status outputs such as Empty, Full, Count, PushError, and PopError. This makes the logic easier to monitor during testing and helps identify issues such as popping from an empty queue or pushing when the queue is full.</p>
+        <p>The function block uses rising-edge detection internally, so a sensor that remains on for several PLC scans only creates one push or pop event. This is important because a box may stay in front of a photoeye for longer than one PLC scan.</p>
+
+        <div class="code-card">
+<pre>FUNCTION_BLOCK FB_BoxFIFO
+VAR_INPUT
+    Push    : BOOL;   // Add a new box type on rising edge
+    Pop     : BOOL;   // Read/remove oldest box type on rising edge
+    Reset   : BOOL;   // Clear FIFO
+    InValue : INT;    // 0 = small, 1 = big
+END_VAR
+
+VAR_OUTPUT
+    OutValue  : INT;
+    Empty     : BOOL;
+    Full      : BOOL;
+    Count     : INT;
+    PushError : BOOL;
+    PopError  : BOOL;
+END_VAR
+
+VAR
+    Buffer   : ARRAY[0..19] OF INT;
+    Head     : INT := 0;
+    Tail     : INT := 0;
+    Size     : INT := 20;
+    PushOld  : BOOL := FALSE;
+    PopOld   : BOOL := FALSE;
+    PushEdge : BOOL;
+    PopEdge  : BOOL;
+END_VAR</pre>
+        </div>
+
+        <div class="code-card">
+<pre>PushEdge := Push AND NOT PushOld;
+PopEdge  := Pop AND NOT PopOld;
+
+PushOld := Push;
+PopOld  := Pop;
+
+IF Reset THEN
+    Head := 0;
+    Tail := 0;
+    Count := 0;
+    OutValue := 0;
+    Empty := TRUE;
+    Full := FALSE;
+    PushError := FALSE;
+    PopError := FALSE;
+ELSE
+    PushError := FALSE;
+    PopError := FALSE;
+
+    IF PushEdge THEN
+        IF Count &lt; Size THEN
+            Buffer[Tail] := InValue;
+            Tail := Tail + 1;
+            IF Tail &gt;= Size THEN
+                Tail := 0;
+            END_IF;
+            Count := Count + 1;
+        ELSE
+            PushError := TRUE;
+        END_IF;
+    END_IF;
+
+    IF PopEdge THEN
+        IF Count &gt; 0 THEN
+            OutValue := Buffer[Head];
+            Head := Head + 1;
+            IF Head &gt;= Size THEN
+                Head := 0;
+            END_IF;
+            Count := Count - 1;
+        ELSE
+            PopError := TRUE;
+        END_IF;
+    END_IF;
+
+    Empty := Count = 0;
+    Full  := Count &gt;= Size;
+END_IF;</pre>
+        </div>
+
+        <p style="margin-top: 1.25rem;">In the main PLC program, the FIFO block is called from Ladder Logic. The push input is triggered by the upstream box detection point, the pop input is triggered by the unload point, and the output value is used to decide which route the current box should take.</p>
+      </div>
+
+      <div class="project-panel" id="plc-implementation">
+        <div class="section-kicker">Section 7</div>
+        <h2>PLC Implementation</h2>
+        <p>The PLC implementation combines Ladder Logic and Structured Text. Ladder Logic was used for the main machine sequence because it provides clear visibility for conveyor outputs, turntable commands, timers, and sensor conditions. Structured Text was used for the reusable FIFO function block because the queue logic is cleaner and more maintainable when written as indexed buffer logic.</p>
+        <p>
+          The PLC program was structured around a GRAPH-based sequence that coordinated the load and unload phases of the sorting process. 
+          The LoadCycle handled box entry and preparation for sorting, while the UnloadCycle managed the turntable and discharge operation. 
+          Transitions such as <code>GVL.LoadTransition</code> and <code>GVL.UnloadTransition</code> were used to move between these states, ensuring that the system followed a deterministic and repeatable operating sequence.
+        </p>
+        <div style="margin-top:2.5rem; text-align:center;">
+          <img src="Pics/Graph.png" alt="Factory IO load and unload sequence implemented using GRAPH" style="max-width:60%; border-radius:18px; box-shadow:0 4px 24px rgba(0,0,0,0.18);">
+          <div style="color:var(--muted); font-size:0.98rem; max-width:70%; margin:0.85rem auto 2rem;">
+            Sequence control implemented using GRAPH, linking the load and unload cycles through defined transition conditions. 
+            This structure allowed the box sorting process to operate in a repeatable cycle, coordinating conveyor movement, turntable positioning, and unloading logic.
+          </div>
+        </div>
+
+        <div class="row g-4" style="margin-top: 0.5rem;">
+          <div class="col-lg-6">
+            <div style="height: 100%; padding: 1.25rem; border-radius: 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);">
+              <h5 style="margin-bottom: 1rem; font-weight: 700;">Core PLC Work</h5>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>Implemented conveyor run logic from the start command</li>
+                <li>Built turntable actuation logic using permissives and timing</li>
+                <li>Created FIFO push and pop events from sensor transitions</li>
+                <li>Stored box size classification as an integer value</li>
+                <li>Used FIFO output to command big-box and small-box routing</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div style="height: 100%; padding: 1.25rem; border-radius: 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);">
+              <h5 style="margin-bottom: 1rem; font-weight: 700;">Engineering Approach</h5>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>Separated detection, tracking, and sorting into distinct logic sections</li>
+                <li>Used a reusable function block instead of hardcoding one-off logic</li>
+                <li>Added diagnostic outputs for commissioning and troubleshooting</li>
+                <li>Protected against duplicate sensor events with edge detection</li>
+                <li>Designed the system to support multiple boxes in transit</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <p style="margin-top: 1.25rem;">A key learning outcome was understanding that physical distance in a conveyor system must be represented logically in the PLC. The sensors only provide information at specific locations, so the program must bridge the gap by storing and recalling information at the correct moment.</p>
+
+      </div>
+
+      <div class="project-panel" id="technical-skills">
+        <div class="section-kicker">Section 8</div>
+        <h2>Key Technical Skills Demonstrated</h2>
+        <p>This project brought together several practical controls engineering skills, including PLC programming, sensor-based sequencing, reusable function block design, conveyor tracking, and commissioning-style troubleshooting.</p>
+
+        <div class="row g-4" style="margin-top: 0.75rem;">
+          <div class="col-md-6 col-lg-4">
+            <div style="height:100%; padding:1.1rem; border-radius:18px; background: rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);">
+              <h5 style="font-weight:700; margin-bottom:0.8rem;">PLC & Logic Design</h5>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>Ladder Logic</li>
+                <li>Structured Text</li>
+                <li>IEC 61131-3 function blocks</li>
+                <li>One-shot / rising-edge logic</li>
+                <li>Timer-based machine control</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div style="height:100%; padding:1.1rem; border-radius:18px; background: rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);">
+              <h5 style="font-weight:700; margin-bottom:0.8rem;">Material Handling</h5>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>Factory IO simulation</li>
+                <li>Conveyor control</li>
+                <li>Turntable routing</li>
+                <li>Box classification</li>
+                <li>Multi-box tracking</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div style="height:100%; padding:1.1rem; border-radius:18px; background: rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06);">
+              <h5 style="font-weight:700; margin-bottom:0.8rem;">Commissioning & Debugging</h5>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>FIFO diagnostics</li>
+                <li>Sensor event validation</li>
+                <li>Watch variable monitoring</li>
+                <li>Fault and reset testing</li>
+                <li>Structured troubleshooting</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <p style="margin-top: 1.25rem;">Overall, this project demonstrates my ability to build a working PLC automation solution that handles real sequencing challenges, not just simple input-output control. The FIFO-based tracking method shows practical thinking around conveyor systems, part identity, and reusable control logic.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="container d-flex flex-column flex-md-row justify-content-between gap-2 footer-bar">
+      <span>&copy; 2026 Nitin Kumar</span>
+      <span>Industrial Automation - Controls Software - Technical Engineering</span>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+</body>
+</html>
