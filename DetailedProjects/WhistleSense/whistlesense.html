@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WhistleSense | Detailed Project</title>
+  <meta name="description" content="Detailed breakdown of WhistleSense, a smart pressure-cooker whistle detection prototype built as an independent hobby project." />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --bg-soft: #111823;
+      --panel: rgba(17, 24, 35, 0.78);
+      --panel-border: rgba(255, 255, 255, 0.08);
+      --text: #e8eef7;
+      --muted: #9fb0c3;
+      --accent: #ffb84d;
+      --accent-2: #73e2a7;
+      --accent-soft: rgba(255, 184, 77, 0.14);
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(255, 184, 77, 0.13), transparent 28%),
+        radial-gradient(circle at top right, rgba(115, 226, 167, 0.09), transparent 22%),
+        linear-gradient(180deg, #081018 0%, #0b0f14 35%, #0e141d 100%);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .navbar {
+      background: rgba(8, 16, 24, 0.76);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 0.9rem 0;
+    }
+
+    .navbar-brand {
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.95rem;
+    }
+
+    .nav-link {
+      color: var(--muted) !important;
+      font-weight: 500;
+      transition: 0.2s ease;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus {
+      color: var(--text) !important;
+    }
+
+    .section-heading {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .section-kicker {
+      color: var(--accent);
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      margin-bottom: 0.85rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .lead {
+      color: var(--muted);
+      max-width: 900px;
+      margin: 0.9rem auto 0;
+      line-height: 1.8;
+    }
+
+    .chip {
+      background: var(--accent-soft);
+      color: #ffe5bd;
+      border: 1px solid rgba(255, 184, 77, 0.22);
+      padding: 0.55rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .project-panel {
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 2rem 2.2rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .project-panel h2 {
+      font-size: clamp(1.4rem, 2.3vw, 2rem);
+      font-weight: 700;
+      margin-bottom: 0.85rem;
+    }
+
+    .project-panel p {
+      color: var(--muted);
+      margin-bottom: 1rem;
+      line-height: 1.75;
+    }
+
+    .overview-panel {
+      padding: 2.4rem 2.4rem;
+    }
+
+    .toc-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.85rem;
+      align-items: stretch;
+    }
+
+    .toc-list a {
+      display: block;
+      padding: 0.95rem 1rem;
+      min-height: 52px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 184, 77, 0.22);
+      background: rgba(255, 184, 77, 0.08);
+      color: #ffe5bd;
+      font-weight: 600;
+      transition: 0.2s ease;
+    }
+
+    .toc-list a:hover {
+      background: rgba(255, 184, 77, 0.16);
+      transform: translateX(2px);
+    }
+
+    .bullet-list {
+      margin: 0.5rem 1.5rem 0.85rem;
+      padding-left: 1rem;
+      color: #d9e8f7;
+      line-height: 1.75;
+    }
+
+    .info-card {
+      height: 100%;
+      padding: 1.25rem;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .info-card h5 {
+      margin-bottom: 0.85rem;
+      font-weight: 700;
+    }
+
+    .image-block {
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .image-block img {
+      max-width: 100%;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+    }
+
+    .image-caption {
+      color: var(--muted);
+      font-size: 0.98rem;
+      max-width: 800px;
+      margin: 0.85rem auto 0;
+      line-height: 1.55;
+    }
+
+    .highlight-box {
+      border-left: 4px solid var(--accent);
+      background: rgba(255, 184, 77, 0.08);
+      padding: 1.1rem 1.2rem;
+      border-radius: 14px;
+      color: #ffe5bd;
+      line-height: 1.7;
+      margin: 1rem 0;
+    }
+
+    footer {
+      margin-top: 2.4rem;
+    }
+
+    .footer-bar {
+      padding: 1.2rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    @media (max-width: 767px) {
+      .project-panel {
+        padding: 1.6rem 1.2rem;
+      }
+
+      .overview-panel {
+        padding: 1.6rem 1.2rem;
+      }
+
+      .toc-list {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="../../index.html">Nitin Kumar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="../../index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="../../experience.html">Experience</a></li>
+          <li class="nav-item"><a class="nav-link" href="../../projects.html">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://www.linkedin.com/in/r-nitin-kumar/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section style="padding-top: 6.5rem;">
+    <div class="container">
+      <div class="section-heading">
+        <div class="section-kicker">Independent Hobby Project</div>
+        <h1 class="section-title">WhistleSense</h1>
+        <p class="lead">
+          A smart pressure-cooker whistle detection prototype designed for Indian kitchens, built to explore audio sensing,
+          vibration detection, temperature validation, and real cooking-session data logging.
+        </p>
+
+        <div style="display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem;">
+          <span class="chip">ESP32</span>
+          <span class="chip">INMP441 I2S Microphone</span>
+          <span class="chip">MPU6050 Accelerometer</span>
+          <span class="chip">DS18B20 / Temperature Sensing</span>
+          <span class="chip">Sensor Fusion</span>
+          <span class="chip">Audio Signal Processing</span>
+          <span class="chip">RMS & Peak Detection</span>
+          <span class="chip">Frequency Ratio Analysis</span>
+          <span class="chip">Python Data Logging</span>
+          <span class="chip">CSV Analysis</span>
+          <span class="chip">Embedded Prototyping</span>
+          <span class="chip">Product Feasibility</span>
+        </div>
+      </div>
+
+      <div class="project-panel">
+        <div class="section-kicker">Table of Contents</div>
+        <h2>Navigate this project</h2>
+        <ul class="toc-list">
+          <li><a href="#overview">1. Project Overview</a></li>
+          <li><a href="#problem">2. Problem Statement</a></li>
+          <li><a href="#prototype">3. V0 Prototype</a></li>
+          <li><a href="#architecture">4. System Architecture</a></li>
+          <li><a href="#sensor-stack">5. Sensor Stack</a></li>
+          <li><a href="#detection-logic">6. Whistle Detection Logic</a></li>
+          <li><a href="#data-logging">7. Data Logging & Testing</a></li>
+          <li><a href="#accelerometer">8. Accelerometer & Sensor Fusion</a></li>
+          <li><a href="#lessons">9. Technical Lessons Learned</a></li>
+          <li><a href="#outcome">10. Project Outcome</a></li>
+        </ul>
+      </div>
+
+      <div class="project-panel overview-panel" id="overview">
+        <div class="section-kicker">Section 1</div>
+        <h2>Project Overview</h2>
+        <p>
+          WhistleSense is a smart pressure-cooker whistle counter concept developed as an independent hobby project.
+          The idea was to create a compact device that attaches to a pressure cooker handle and helps users track whistle counts
+          without needing to stand near the cooker throughout the cooking process.
+        </p>
+        <p>
+          The device concept combines multiple signals: pressure cooker whistle sound, vibration travelling through the cooker handle,
+          and temperature feedback to confirm that the cooker is actively heating. The user sets a target whistle count, such as two
+          or three whistles, and the device counts confirmed whistle events before alerting the user through a buzzer, LED/display
+          indication, and eventually a phone notification.
+        </p>
+        <div class="image-block">
+          <img src="Pics/WhistleSense_Hero.png" alt="WhistleSense smart pressure cooker whistle counter concept" style="max-width:40%; border-radius:18px; box-shadow:0 4px 24px rgba(0,0,0,0.18); margin-bottom:1.1rem;">
+          <div style="color:var(--muted); font-size:1.04rem; max-width:800px; margin:0 auto;">
+            Concept visual of WhistleSense as a compact strap-mounted device attached to a pressure cooker handle.
+          </div>
+        </div>
+
+        <p>
+          The broader vision was to explore whether industrial-style automation concepts could be brought into everyday kitchen
+          workflows. Instead of manually counting cooker whistles, the project investigated whether a small embedded device could
+          identify real whistle events reliably using practical, low-cost sensors.
+        </p>
+      </div>
+
+      <div class="project-panel" id="problem">
+        <div class="section-kicker">Section 2</div>
+        <h2>Problem Statement</h2>
+        <p>
+          In many Indian kitchens, pressure cooker cooking is still tracked manually by counting whistles. This sounds simple,
+          but it becomes inconvenient when the user steps away, gets distracted, or is managing multiple tasks at once.
+        </p>
+        <p>
+          The project explored whether a small alert-only device could reduce this mental load by detecting whistles and notifying
+          the user once a target count is reached. The key product question was whether people would value an alert-only product,
+          or whether they would only find the concept compelling if it could also turn off the stove automatically.
+        </p>
+
+        <div class="row g-4" style="margin-top: 0.5rem;">
+          <div class="col-lg-6">
+            <div class="info-card">
+              <h5>User Questions Explored</h5>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>How often do users miss pressure cooker whistles?</li>
+                <li>What usually happens when they miss one?</li>
+                <li>Would an alert-only version be useful?</li>
+                <li>Would users trust a small device near a cooker?</li>
+                <li>Would users attach the device to the handle every time?</li>
+                <li>Would users pay for this without stove shut-off automation?</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="info-card">
+              <h5>Engineering Challenge</h5>
+              <p style="margin-bottom: 0;">
+                The main engineering challenge was not just detecting something loud. A real kitchen contains speech, utensils,
+                mixer noise, TV audio, background movement, and short impulse sounds. The system needed to distinguish real cooker
+                whistles from these false positives using multiple signal features.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-panel" id="prototype">
+        <div class="section-kicker">Section 3</div>
+        <h2>WhistleSense V0 Prototype</h2>
+        <p>
+          WhistleSense V0 was designed as a temporary sensor band or clip attached to a pressure cooker handle. The goal of this
+          prototype was not to build a polished final consumer product, but to collect real cooking-session data and understand
+          whether whistles could be detected accurately.
+        </p>
+        <p>
+          The V0 prototype did not need internet connectivity or mobile notifications. Its main purpose was data capture:
+          measuring sensor signals, saving timestamped readings, and allowing manual whistle marking so the algorithm could be
+          compared against human-labelled ground truth.
+        </p>
+
+        <div class="row g-4" style="margin-top: 0.5rem;">
+          <div class="col-md-6">
+            <div class="info-card">
+              <h5>Prototype Goals</h5>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>Attach securely to or around the cooker handle</li>
+                <li>Measure sound, vibration, and temperature</li>
+                <li>Allow manual marking of each real whistle</li>
+                <li>Save timestamped sensor data</li>
+                <li>Show whether reliable whistle detection is possible</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="info-card">
+              <h5>Success Criteria</h5>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>Good signal: detect 8 out of 10 real whistles</li>
+                <li>Strong signal: detect 9 out of 10 real whistles</li>
+                <li>False positives should be rare or explainable</li>
+                <li>Should work across different cooker types</li>
+                <li>Should survive one full cooking session safely</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="image-block">
+          <img src="Pics/WhistleSense_Prototype_Setup.jpeg" alt="WhistleSense V0 prototype electronics setup" style="max-width:40%; border-radius:18px; box-shadow:0 4px 24px rgba(0,0,0,0.18); margin-bottom:1.1rem;">
+          <div style="color:var(--muted); font-size:1.04rem; max-width:800px; margin:0 auto;">
+            V0 prototype setup used to capture pressure cooker audio, vibration, temperature, and manual whistle markers.
+          </div>
+        </div>
+      </div>
+
+      <div class="project-panel" id="architecture">
+        <div class="section-kicker">Section 4</div>
+        <h2>System Architecture</h2>
+        <p>
+          The WhistleSense architecture was built around an ESP32 microcontroller collecting multiple sensor streams and sending
+          structured readings to a laptop over serial for logging and analysis. The design was kept intentionally simple so that
+          early testing could focus on signal quality and detection feasibility.
+        </p>
+
+        <div class="row g-4" style="margin-top: 0.5rem;">
+          <div class="col-lg-6">
+            <div class="info-card">
+              <h5>Inputs</h5>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>INMP441 microphone audio stream</li>
+                <li>MPU6050 accelerometer / vibration readings</li>
+                <li>Temperature sensor reading from cooker handle area</li>
+                <li>Manual push button for ground-truth whistle labels</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="info-card">
+              <h5>Outputs and Logging</h5>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>Serial CSV output from ESP32</li>
+                <li>Python logger using pyserial</li>
+                <li>CSV files for Excel, Anaconda, or Jupyter analysis</li>
+                <li>LED and buzzer for debugging and future alert testing</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="image-block">
+          <img src="Pics/WhistleSense_Architecture.png" alt="WhistleSense system architecture diagram" style="max-width:60%; border-radius:18px; box-shadow:0 4px 24px rgba(0,0,0,0.18); margin-bottom:1.1rem;">
+          <div style="color:var(--muted); font-size:1.04rem; max-width:800px; margin:0 auto;">
+            System architecture showing sensor capture, ESP32 processing, serial CSV logging, and offline analysis.
+          </div>
+        </div>
+      </div>
+
+      <div class="project-panel" id="sensor-stack">
+        <div class="section-kicker">Section 5</div>
+        <h2>Sensor Stack</h2>
+        <p>
+          The first sensor stack was selected to test whether whistle detection could be made more reliable by combining sound,
+          vibration, and heat context. The microphone provided the primary signal, while accelerometer and temperature readings
+          were included to support future sensor fusion and reduce false positives.
+        </p>
+
+        <div class="row g-4" style="margin-top: 0.5rem;">
+          <div class="col-md-6 col-lg-4">
+            <div class="info-card">
+              <h5>ESP32</h5>
+              <p style="margin-bottom: 0;">
+                Used as the main development board because it is low-cost, widely available, easy to program, and supports
+                Wi-Fi/Bluetooth for future iterations.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div class="info-card">
+              <h5>INMP441 Microphone</h5>
+              <p style="margin-bottom: 0;">
+                Used to measure whistle audio intensity and frequency patterns, and to compare pressure cooker whistles against
+                speech, utensils, mixer noise, TV audio, and other kitchen sounds.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div class="info-card">
+              <h5>MPU6050 Accelerometer</h5>
+              <p style="margin-bottom: 0;">
+                Used to explore vibration bursts during whistle events and check whether vibration travels clearly to the cooker handle
+                across different cooker types.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div class="info-card">
+              <h5>Temperature Sensor</h5>
+              <p style="margin-bottom: 0;">
+                Used to confirm that the cooker is actively heating and to reduce false positives from random whistle-like sounds
+                when no cooking event is happening.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div class="info-card">
+              <h5>Manual Button</h5>
+              <p style="margin-bottom: 0;">
+                Used to mark actual whistle events during testing, creating ground-truth labels that could be compared with algorithmic
+                detections.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div class="info-card">
+              <h5>Buzzer and LED</h5>
+              <p style="margin-bottom: 0;">
+                Used for debugging, live test feedback, and future alert behaviour when a target whistle count is reached.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-panel" id="detection-logic">
+        <div class="section-kicker">Section 6</div>
+        <h2>Whistle Detection Logic</h2>
+        <p>
+          The detection logic evolved through multiple iterations. The first version relied on RMS sound energy crossing a threshold
+          for a minimum duration. This worked for controlled audio clips, but was not reliable enough for real kitchens because human
+          speech and kitchen noise can also produce high RMS values.
+        </p>
+        <p>
+          The algorithm then moved toward frequency-band analysis. A real cooker whistle was treated not only as a loud sound, but
+          as a signal with energy concentrated in whistle-like frequency bands. This helped distinguish actual whistle events from
+          random loud noises.
+        </p>
+
+        <div class="row g-4" style="margin-top: 0.5rem;">
+          <div class="col-lg-6">
+            <div class="info-card">
+              <h5>Detection Features Used</h5>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>RMS sound energy</li>
+                <li>Peak value</li>
+                <li>Frequency ratio from 2000-6000 Hz</li>
+                <li>Frequency ratio from 3000-7000 Hz</li>
+                <li>Minimum duration check</li>
+                <li>Cooldown period after confirmed detection</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="info-card">
+              <h5>Current Working Flow</h5>
+              <ol class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>Read audio from INMP441</li>
+                <li>Calculate RMS and peak</li>
+                <li>Apply lightweight RMS prefilter</li>
+                <li>Run frequency analysis only if needed</li>
+                <li>Check final RMS threshold</li>
+                <li>Check whistle-like frequency ratios</li>
+                <li>Confirm signal duration</li>
+                <li>Apply cooldown</li>
+                <li>Count whistle</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <div class="image-block">
+          <img src="Pics/WhistleSense_RMS_Frequency_Graph.png" alt="WhistleSense RMS and frequency ratio analysis graph" style="max-width:60%; border-radius:18px; box-shadow:0 4px 24px rgba(0,0,0,0.18); margin-bottom:1.1rem;">
+          <div style="color:var(--muted); font-size:1.04rem; max-width:800px; margin:0 auto;">
+            CSV analysis showing how RMS and whistle-like frequency ratios change during confirmed pressure cooker whistles.
+          </div>
+        </div>
+
+        <p>
+          In one of the later test runs, the updated algorithm detected four whistles while the manual button also marked four real
+          whistles. The delay between the manual marker and algorithm detection was consistently around 760 ms, which was acceptable
+          for an alert-focused prototype.
+        </p>
+      </div>
+
+      <div class="project-panel" id="data-logging">
+        <div class="section-kicker">Section 7</div>
+        <h2>Data Logging and Testing</h2>
+        <p>
+          Data logging was the most important feature of the V0 prototype. Instead of trying to perfect the product immediately,
+          the project focused on collecting real signals from real cooking sessions and using those logs to decide whether the idea
+          was technically promising.
+        </p>
+
+        <div class="row g-4" style="margin-top: 0.5rem; margin-bottom: 1rem;">
+          <div class="col-md-6">
+            <div class="info-card">
+              <h5>Option A: Laptop Logging</h5>
+              <p style="margin-bottom: 0;">
+                The ESP32 sends CSV-style data over USB serial. A Python script reads the serial stream using pyserial and saves
+                the data into CSV files for later analysis.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="info-card">
+              <h5>Option B: microSD Logging</h5>
+              <p style="margin-bottom: 0;">
+                A more standalone version could log to a microSD card, making it easier to give the prototype to other people for
+                testing in their own kitchens.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <p>
+          Testing included human speech, kitchen background noise, pressure cooker audio played from a phone, and real pressure
+          cooker whistle audio. Real cooker data became the main source of truth because phone audio did not match the strength
+          and behaviour of an actual cooker whistle closely enough.
+        </p>
+      </div>
+
+      <div class="project-panel" id="accelerometer">
+        <div class="section-kicker">Section 8</div>
+        <h2>Accelerometer and Sensor Fusion</h2>
+        <p>
+          The PDF notes mainly describe the microphone-focused development path, but the accelerometer was an important part of
+          the intended prototype direction. The purpose of adding an MPU6050 accelerometer/gyro was to measure vibration bursts
+          travelling through the cooker handle during whistle events.
+        </p>
+        <p>
+          The reason this matters is that sound alone can be fooled by speech, TV, utensils, mixers, or background noise. A real
+          pressure cooker whistle should create a combination of signals: strong whistle-like audio, vibration activity on the cooker,
+          and a temperature profile indicating that cooking is actually happening.
+        </p>
+
+        <div class="row g-4" style="margin-top: 0.5rem;">
+          <div class="col-lg-6">
+            <div class="info-card">
+              <h5>Accelerometer Role</h5>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>Detect vibration bursts during whistle release</li>
+                <li>Check whether vibration transfers reliably to the handle</li>
+                <li>Compare signal strength across different cooker designs</li>
+                <li>Use vibration as a confirmation signal alongside microphone data</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="info-card">
+              <h5>Future Sensor Fusion Logic</h5>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>Microphone confirms whistle-like sound signature</li>
+                <li>Accelerometer confirms cooker-body vibration event</li>
+                <li>Temperature confirms the cooker is actively heating</li>
+                <li>Manual labels validate whether detections match real whistles</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="image-block">
+          <img src="Pics/WhistleSense_Accelerometer_Graph.png" alt="WhistleSense accelerometer vibration analysis graph" style="max-width:60%; border-radius:18px; box-shadow:0 4px 24px rgba(0,0,0,0.18); margin-bottom:1.1rem;">
+          <div style="color:var(--muted); font-size:1.04rem; max-width:800px; margin:0 auto;">
+            Accelerometer testing would help verify whether real whistle events create measurable vibration bursts at the cooker handle.
+          </div>
+        </div>
+
+        <p>
+          This sensor fusion direction is also what makes the project more interesting from an engineering perspective. It shows
+          that the system was not treated as a simple sound trigger, but as a small embedded sensing problem where multiple noisy
+          real-world signals need to be combined.
+        </p>
+      </div>
+
+      <div class="project-panel" id="lessons">
+        <div class="section-kicker">Section 9</div>
+        <h2>Technical Lessons Learned</h2>
+        <p>
+          The project produced several useful technical lessons about embedded sensing, audio detection, and real-world data collection.
+          These lessons are the strongest part of the project from a portfolio perspective.
+        </p>
+
+        <div class="row g-4" style="margin-top: 0.5rem;">
+          <div class="col-md-6">
+            <div class="info-card">
+              <h5>Signal Processing Lessons</h5>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>Phone whistle audio is not enough for validation</li>
+                <li>Real cooker data must be the main source of truth</li>
+                <li>RMS alone is risky because speech can create high energy</li>
+                <li>Peak alone is worse because kitchen clanks create spikes</li>
+                <li>Duration checks help reject short impulse noise</li>
+                <li>Frequency ratios are valuable for identifying whistle-like sounds</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="info-card">
+              <h5>Product and Testing Lessons</h5>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>Manual ground-truth labels made the data much more useful</li>
+                <li>Mic-only detection looked promising but should not be the final approach</li>
+                <li>Sensor placement and attachment comfort matter</li>
+                <li>Different cooker types may behave differently</li>
+                <li>Commercialisation would require strong differentiation and significant validation</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="image-block">
+          <img src="Pics/WhistleSense_Analysis_Notebook.png" alt="WhistleSense data analysis notebook" style="max-width:60%; border-radius:18px; box-shadow:0 4px 24px rgba(0,0,0,0.18); margin-bottom:1.1rem;">
+          <div style="color:var(--muted); font-size:1.04rem; max-width:800px; margin:0 auto;">
+            Offline analysis helped compare raw sensor readings, detected events, and manually labelled whistle moments.
+          </div>
+        </div>
+      </div>
+
+      <div class="project-panel" id="outcome">
+        <div class="section-kicker">Section 10</div>
+        <h2>Project Outcome</h2>
+        <p>
+          WhistleSense is being positioned as a completed independent hobby project and prototype exploration rather than an active
+          commercial product. The technical prototype showed promising signs, especially in microphone-based whistle detection using
+          RMS, duration, and frequency-ratio filtering.
+        </p>
+        <p>
+          However, turning this into a profitable consumer product would require extensive industrial design, safety validation,
+          market testing, manufacturing, app development, support infrastructure, and differentiation against established appliance
+          and kitchen technology brands. Based on that commercial reality, the project is best presented as a strong technical
+          learning project rather than a startup attempt.
+        </p>
+
+        <div class="highlight-box">
+          Final positioning: WhistleSense demonstrates embedded prototyping, sensor selection, signal processing, data logging,
+          algorithm iteration, and product feasibility thinking in a real-world kitchen environment.
+        </div>
+
+        <div class="row g-4" style="margin-top: 0.75rem;">
+          <div class="col-md-6 col-lg-4">
+            <div class="info-card">
+              <h5>Embedded Systems</h5>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>ESP32 prototyping</li>
+                <li>I2S microphone integration</li>
+                <li>Accelerometer testing</li>
+                <li>Temperature sensing</li>
+                <li>Button, LED, and buzzer I/O</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div class="info-card">
+              <h5>Data and Algorithms</h5>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>Serial data logging</li>
+                <li>CSV-based analysis</li>
+                <li>RMS and peak calculation</li>
+                <li>Frequency-band ratios</li>
+                <li>Threshold, duration, and cooldown logic</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-4">
+            <div class="info-card">
+              <h5>Product Thinking</h5>
+              <ul class="bullet-list" style="margin: 0 0 0 1rem;">
+                <li>User problem validation</li>
+                <li>Prototype success criteria</li>
+                <li>Market feasibility review</li>
+                <li>Competitor awareness</li>
+                <li>Decision to preserve as hobby project</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container d-flex flex-column flex-md-row justify-content-between gap-2 footer-bar">
+      <span>&copy; 2026 Nitin Kumar</span>
+      <span>Embedded Systems - Signal Processing - Product Prototyping</span>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,385 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nitin Kumar | Projects</title>
+  <meta name="description" content="Technical projects by Nitin Kumar: automation, controls, simulation, and engineering software." />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+        .card-img-top {
+          margin-top: 1.1rem;
+          margin-left: 1rem;
+          margin-right: 1rem;
+          border-radius: 16px;
+          width: calc(100% - 2rem);
+          box-shadow: 0 2px 12px rgba(77,181,255,0.08);
+          background: #10151e;
+        }
+        .card > iframe {
+          display: block;
+          margin-top: 1.1rem;
+          margin-left: 1rem;
+          margin-right: 1rem;
+          border-radius: 16px;
+          width: calc(100% - 2rem);
+          background: #10151e;
+          box-shadow: 0 2px 12px rgba(77,181,255,0.08);
+        }
+        .card .card-body iframe {
+          display: block;
+          margin-top: 1.1rem;
+          margin-left: 1rem;
+          margin-right: 1rem;
+          border-radius: 16px;
+          width: calc(100% - 2rem);
+          background: #10151e;
+          box-shadow: 0 2px 12px rgba(77,181,255,0.08);
+        }
+    :root {
+      --bg: #0b0f14;
+      --bg-soft: #111823;
+      --panel: rgba(17, 24, 35, 0.78);
+      --panel-border: rgba(255, 255, 255, 0.08);
+      --text: #e8eef7;
+      --muted: #9fb0c3;
+      --accent: #4db5ff;
+      --accent-soft: rgba(77, 181, 255, 0.14);
+      --success: #73e2a7;
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(77, 181, 255, 0.12), transparent 28%),
+        radial-gradient(circle at top right, rgba(115, 226, 167, 0.08), transparent 22%),
+        linear-gradient(180deg, #081018 0%, #0b0f14 35%, #0e141d 100%);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    .navbar {
+      background: rgba(8, 16, 24, 0.76);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 0.9rem 0;
+    }
+    .navbar-brand {
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.95rem;
+    }
+    .nav-link {
+      color: var(--muted) !important;
+      font-weight: 500;
+      transition: 0.2s ease;
+    }
+    .nav-link:hover, .nav-link:focus {
+      color: var(--text) !important;
+    }
+    .section-heading {
+      margin-bottom: 2.5rem;
+      text-align: center;
+    }
+    .section-kicker {
+      color: var(--accent);
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      margin-bottom: 0.85rem;
+    }
+    .section-title {
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+    .feature-cards {
+      margin-top: 2.5rem;
+    }
+    .card {
+      box-shadow: var(--shadow);
+      border-radius: 22px;
+      border: 1px solid var(--panel-border);
+      background: linear-gradient(180deg, rgba(17, 24, 35, 0.86), rgba(10, 14, 20, 0.96));
+      color: var(--text);
+      margin-bottom: 2.2rem;
+      transition: box-shadow 0.18s, border-color 0.18s, transform 0.18s;
+    }
+    .card:hover {
+      box-shadow: 0 8px 32px rgba(77,181,255,0.13), 0 2px 8px rgba(0,0,0,0.18);
+      border-color: var(--accent);
+      transform: translateY(-4px) scale(1.025);
+      z-index: 2;
+    }
+    .card-title {
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .badge {
+      background: var(--accent-soft) !important;
+      color: #cbe7ff !important;
+      border: 1px solid rgba(77, 181, 255, 0.2);
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-right: 0.3rem;
+      margin-bottom: 0.3rem;
+    }
+    .project-link-btn {
+      color: var(--accent) !important;
+      border-color: var(--accent) !important;
+      background: rgba(77,181,255,0.07);
+    }
+    .project-link-btn:hover {
+      background: var(--accent);
+      color: #081018 !important;
+      border-color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Nitin Kumar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="experience.html">Experience</a></li>
+          <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="https://www.linkedin.com/in/r-nitin-kumar/" target="_blank">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section style="padding-top: 6.5rem;">
+    <div class="container">
+      <div class="section-heading">
+        <div class="section-kicker">Portfolio</div>
+        <h1 class="section-title">Game Dev Projects</h1>
+      </div>
+
+
+<section id="features">
+  <div class="feature-cards row row-cols-1 row-cols-md-2 row-cols-lg-3">
+
+    <div class="col">
+          <div class="card" >
+        <img src="Projects/Bowled.png" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Bowled.io</h5>
+              <span class="badge rounded-pill text-bg-light">Unity</span>
+              <span class="badge rounded-pill text-bg-light">Figma</span>
+              <span class="badge rounded-pill text-bg-light">Managing Database</span>
+              <span class="badge rounded-pill text-bg-light">Facebook SDK</span>
+              <span class="badge rounded-pill text-bg-light">Firebase SDK</span>
+              <span class="badge rounded-pill text-bg-light">API Integration</span>
+              <p class="card-text">Bowled.io is the world’s first Cricket based Play 2 Earn game: 
+                an ecosystem of assets where players can compete against each other on user-owned teams. 
+                As a Lead Game Developer, I took on the challenge of conceptualizing, designing, and 
+                developing Bowled.io. I was also given the lead to develop and integrate APIs with the 
+                game along with the integration of firebase and facebook SDKs. The project showcases my 
+                passion for game development and the ability to deliver unique gaming experiences tailored
+                 to specific interests and communities.</p>
+            </div>
+          </div>
+    </div>
+    
+    <div class="col">
+          <div class="card">
+            <iframe width="100%" height="200" src="https://www.youtube.com/embed/e1ZE2OY_I8Q?si=-D3kOfPYIr6Vv3Dl" 
+            title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
+            gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <div class="card-body">
+              <h5 class="card-title">The Hero's Guild</h5>
+    <span class="badge rounded-pill text-bg-light">Unity VR</span>
+    <span class="badge rounded-pill text-bg-light">.NET API Development</span>
+    <span class="badge rounded-pill text-bg-light">Cloud Storage</span>
+    <span class="badge rounded-pill text-bg-light">Dynamic Asset Loading</span>
+    <span class="badge rounded-pill text-bg-light">Narrative Design</span>
+    <span class="badge rounded-pill text-bg-light">Environmental Storytelling</span>
+    <p class="card-text">The Hero's Guild is a VR game focused on dynamic asset loading and narrative-driven 
+      design, overcoming the hardware limitations of standalone VR headsets by using cloud-based asset storage and API 
+      integration. The game adapts its world and quests based on player decisions, creating a personalized 
+      and evolving experience. This was my dissertation project that included the development of the game, the API, 
+      and integration of Dropbox with API for storing and loading high-quality assets, ensuring seamless gameplay 
+      in expansive VR environments. This allows for the development of open-world games for Virtual Reality.</p>
+            </div>
+          </div>
+    </div>
+
+    <div class="col">
+      <div class="card">
+        <iframe width="100%" height="200" src="https://www.youtube.com/embed/siqa0jKtts0?si=qSfDwDx5mdP2tVIN" 
+        title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
+        gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <div class="card-body">
+            <h5 class="card-title">Emotion Escapade</h5>
+            <span class="badge rounded-pill text-bg-light">TIGA Best Student Award Finalist</span>
+            <span class="badge rounded-pill text-bg-light">Unity</span>
+            <span class="badge rounded-pill text-bg-light">Photoshop</span>
+            <span class="badge rounded-pill text-bg-light">Loosely Coupled Code</span>
+            <span class="badge rounded-pill text-bg-light">Customizable Levels</span>
+            <span class="badge rounded-pill text-bg-light">Event Driven Architecture</span>
+            <p class="card-text">Emotion Escapade is a narrative journey through the landscape of
+              emotions in a side-scrolling platformer. Players become the
+              character narrating his way through life representing a wide range
+              of emotions like happiness, sadness and anger, and when the
+              player equips these emotions, he gets a unique ability. The levels
+              also are a symbolic representation of emotional challenges,
+              offering the experience mirroring the ups and downs of real life
+              emotions. The code follows an event driven architecture making it 
+              loosely coupled while the levels are completely customizable, making 
+              it easy to create and build new levels, enhancing the game’s flexibility.</p>
+            <!--<a href="#" class="btn btn-primary">Go somewhere</a>-->
+          </div>
+        </div>
+      </div>
+
+    <div class="col">
+        <div class="card">
+          <iframe width="100%" height="200" src="https://www.youtube.com/embed/R7BxZ5zNGfs?si=fFZqOn_HN1Yus5TX" 
+        title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
+        gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <div class="card-body">
+            <h5 class="card-title">Flora Chase</h5>
+            <span class="badge rounded-pill text-bg-light">Custome Game Engine</span>
+            <span class="badge rounded-pill text-bg-light">C++</span>
+            <span class="badge rounded-pill text-bg-light">FMOD</span>
+            <span class="badge rounded-pill text-bg-light">Bullet Physics</span>
+            <p class="card-text">Flora Chase is an endless runner game set
+              in a world of flora. Players must sprint through landscapes,
+              avoiding trees and collecting diamonds along the way. The
+              goal is to survive and score as high as possible in this
+              thrilling chase through nature’s wonders. The game contains models
+              that were developed using primitive shapes and vertex positions.
+              There were also packages like FMOD, Bullet, Assimp that were integrated
+              for the sound, physics and managing assets respectively. The interesting
+              part was the development of fireflies that circle around the player 
+              following a specific path and also illuminating the player's route.</p>
+            <!--<a href="#" class="btn btn-primary">Go somewhere</a>-->
+          </div>
+        </div>
+    </div>
+
+    <div class="col">
+      <div class="card">
+        <img src="HomePics/ar.png" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Tic Tac Toe AR</h5>
+          <span class="badge rounded-pill text-bg-light">Unity</span>
+          <span class="badge rounded-pill text-bg-light">Blender</span>
+          <span class="badge rounded-pill text-bg-light">ARCore</span>
+          <p class="card-text">Tic Tac Toe AR is a fun and unique spin on the classic game with an 
+            added dimension of being able to move around the game board, making it feel like a 
+            real-life Tic Tac Toe match.</p>
+          <!--<a href="https://www.linkedin.com/posts/r-nitin-kumar_argame-tictactoe-augmentedreality-activity-7024979619908911104-4-rk?utm_source=share&utm_medium=member_desktop" target="_blank" class="btn btn-primary">View post</a>-->
+        </div>
+      </div>
+    </div>
+
+
+        <div class="col">
+          <div class="card" >
+            <iframe width="100%" height="200" src="https://www.youtube.com/embed/y4sM-YZfkdM?si=OrgMFwWiMEq_5sY8" 
+        title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
+        gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <div class="card-body">
+              <h5 class="card-title">Glacier Rush</h5>
+              <span class="badge rounded-pill text-bg-light">Custom Game Engine</span>
+              <span class="badge rounded-pill text-bg-light">Photoshop</span>
+              <span class="badge rounded-pill text-bg-light">Blender</span>
+              <span class="badge rounded-pill text-bg-light">Shaders</span>
+              <p class="card-text"> Glacier Rush is an ice-themed racing game. The track is generated 
+                programmatically using Catmull-Rom splines and there are basic objects in the scene 
+                that are made from vertex positions and primitives. The meshes, lights and the fog 
+                are rendered using a custom shader. There is also a geometry shader that is used to 
+                show the explosion effect of the car when it hits any obstacles in its path. There is 
+                also a TV that displays the whole race, which is done with the help of Frame Buffer 
+                Objects. The whole game is completely customizable and is a solid foundation to build upon.
+              </p>
+              <!--<a href="https://www.linkedin.com/posts/r-nitin-kumar_hunter-apps-on-google-play-activity-6902488300293111808-Uwwv?utm_source=share&utm_medium=member_desktop" target="_blank" class="btn btn-primary">View post</a>-->
+            </div>
+          </div>
+        </div>
+        
+        <div class="col">
+          <div class="card" >
+            <img src="Projects/Lj.png" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">LumberJack</h5>
+              <span class="badge rounded-pill text-bg-light">Monogame</span>
+              <span class="badge rounded-pill text-bg-light">Photoshop</span>
+              <span class="badge rounded-pill text-bg-light">Data Driven</span>
+              <span class="badge rounded-pill text-bg-light">Finite State Machines</span>
+              <p class="card-text"> Lumberjack is a 2D game, where the players take up the role of a skilled
+                lumberjack with the task of chopping down trees. This game tests the players precision, timing 
+                and predictability. The levels are loaded from a text file making it easily customizable. The
+                 bird in the game utilises the power of Finite State Machines to switch between different states. 
+                There is also a custom Animation class to render the sprite sheet animations. The sprite sheet 
+                animations and textures for the game were made using Photoshop.</p>
+              <!--<a href="https://www.linkedin.com/posts/r-nitin-kumar_hunter-apps-on-google-play-activity-6902488300293111808-Uwwv?utm_source=share&utm_medium=member_desktop" target="_blank" class="btn btn-primary">View post</a>-->
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card" >
+            <img src="Projects/ADHD.png" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Inside ADHD: A Journey of Understanding</h5>
+              <span class="badge rounded-pill text-bg-light">Unity</span>
+              <span class="badge rounded-pill text-bg-light">VR</span>
+              <span class="badge rounded-pill text-bg-light">Diegetic Interfaces</span>
+              <p class="card-text">Inside ADHD is a VR experience that aims to immerse users in the daily life of 
+                an individual living with ADHD. The protagonist’s environment is filled with objects that reflect 
+                their life and challenges. The player's phone plays a major role on providing updates on what is going 
+                on. It is one of the Diegetic Interfaces where you can get calls specifying the tasks to remember, and 
+                it also contains the path to get to your objective. For a personal touch, I found it interesting to add 
+                a game that the player can play on their phone. The challenging part was rendering what the player is 
+                currently looking at, turning it into a video and playing it on the screen on loop. This symbolizes that although the 
+                environment has changed, the player cannot stop thinking about it. The whole virtual world is built to react 
+                to the user’s actions and progresses the narrative based on their interactions.</p>
+              <!--<a href="https://www.linkedin.com/posts/r-nitin-kumar_hunter-apps-on-google-play-activity-6902488300293111808-Uwwv?utm_source=share&utm_medium=member_desktop" target="_blank" class="btn btn-primary">View post</a>-->
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col">
+          <div class="card" >
+            <img src="HomePics/hunter.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Hunter</h5>
+              <span class="badge rounded-pill text-bg-light">Unity</span>
+              <span class="badge rounded-pill text-bg-light">Photoshop</span>
+              <p class="card-text">HUNTER is a free mobile game where you need to shoot as many bats 
+                as possible within the given time. This is the first game that I developed on my own, 
+                from designing assets to animation to coding. Even though small, I consider this a huge milestone. </p>
+              <!--<a href="https://www.linkedin.com/posts/r-nitin-kumar_hunter-apps-on-google-play-activity-6902488300293111808-Uwwv?utm_source=share&utm_medium=member_desktop" target="_blank" class="btn btn-primary">View post</a>-->
+            </div>
+          </div>
+        </div>
+
+
+
+  </div>
+</section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
+    </body>
+    </html>
